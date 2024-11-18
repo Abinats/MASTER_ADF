@@ -12,7 +12,11 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "filter1"
@@ -47,7 +51,11 @@
 				"source1 filter(Color!='Blue') ~> filter1",
 				"filter1 aggregate(groupBy(Name,",
 				"          Color),",
-				"     ListPrice = max(ListPrice)) ~> aggregate1"
+				"     ListPrice = max(ListPrice)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
