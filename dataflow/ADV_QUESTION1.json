@@ -30,6 +30,9 @@
 				},
 				{
 					"name": "AlterRow1"
+				},
+				{
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -45,7 +48,9 @@
 				"source1 derive(CID = toInteger(CID)) ~> derivedColumn1",
 				"filter1 alterRow(insertIf(isNull(CID)),",
 				"     updateIf(!isNull(CID))) ~> AlterRow1",
-				"AlterRow1 sink(allowSchemaDrift: true,",
+				"AlterRow1 split(isInsert(),",
+				"     disjoint: false) ~> split1@(Newrow, )",
+				"split1@Newrow sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          CID as integer,",
