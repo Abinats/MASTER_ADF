@@ -30,8 +30,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"derivedColumn1 filter(CID/2!=0) ~> filter1",
-				"source1 derive() ~> derivedColumn1"
+				"derivedColumn1 filter(ERROR_FUNCTION('')) ~> filter1",
+				"source1 derive(CID = toInteger(CID)) ~> derivedColumn1"
 			]
 		}
 	}
