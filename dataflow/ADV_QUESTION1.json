@@ -49,7 +49,7 @@
 				"filter1 alterRow(insertIf(isNull(CID)),",
 				"     updateIf(!isNull(CID))) ~> AlterRow1",
 				"AlterRow1 split(isInsert(),",
-				"     disjoint: false) ~> split1@(Newrow, )",
+				"     disjoint: false) ~> split1@(Newrow, Update)",
 				"split1@Newrow sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
