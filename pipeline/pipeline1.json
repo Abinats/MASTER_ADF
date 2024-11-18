@@ -30,10 +30,23 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_CSV",
+						"referenceName": "DS_PRODUCT_SRC",
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
 			}
 		],
 		"annotations": []
