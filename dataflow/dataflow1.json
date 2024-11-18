@@ -48,7 +48,7 @@
 				"source1 derive(CID = toInteger(CID)) ~> derivedColumn1",
 				"split1@insert alterRow(upsertIf(iif(isNull(CID), \"INSERT\", \"UPDATE\")\r",
 				")) ~> AlterRow1",
-				"filter1 split(!isNull(CID) ,",
+				"filter1 split(isNull(CID) ,",
 				"     disjoint: false) ~> split1@(insert, upsert)",
 				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
