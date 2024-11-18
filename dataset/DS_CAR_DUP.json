@@ -1,0 +1,44 @@
+{
+	"name": "DS_CAR_DUP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "car_duplicate.txt",
+				"fileSystem": "source"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "MODEL_NO",
+				"type": "String"
+			},
+			{
+				"name": "MODEL_NAME",
+				"type": "String"
+			},
+			{
+				"name": "MANUFACTURING_COUNTRY",
+				"type": "String"
+			},
+			{
+				"name": "START_DATE",
+				"type": "String"
+			}
+		]
+	}
+}
