@@ -32,7 +32,7 @@
 					"name": "AlterRow1"
 				},
 				{
-					"name": "exists1"
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -46,11 +46,10 @@
 				"     ignoreNoFilesFound: false) ~> source1",
 				"derivedColumn1 filter(toInteger(CID)%2!=0) ~> filter1",
 				"source1 derive(CID = toInteger(CID)) ~> derivedColumn1",
-				"exists1 alterRow(upsertIf(iif(isNull(CID), \"INSERT\", \"UPDATE\")\r",
+				"split1 alterRow(upsertIf(iif(isNull(CID), \"INSERT\", \"UPDATE\")\r",
 				")) ~> AlterRow1",
-				"filter1, derivedColumn1 exists(derivedColumn1@CID == ERROR_FUNCTION(''),",
-				"     negate:false,",
-				"     broadcast: 'auto')~> exists1",
+				"filter1 split(ERROR_FUNCTION(''),",
+				"     disjoint: false) ~> split1@(, )",
 				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
