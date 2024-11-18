@@ -19,10 +19,15 @@
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          CID as integer,",
+				"          Name as string,",
+				"          MailID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 filter(ERROR_FUNCTION('')) ~> filter1"
+				"source1 filter(CID/2!=0) ~> filter1"
 			]
 		}
 	}
