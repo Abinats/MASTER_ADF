@@ -7,13 +7,53 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "abinaya1013"
 		},
+		"DS_SQL_GENERIC_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DS_SQL_GENERIC'"
+		},
 		"LS_ADLS_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_ADLS'"
 		},
+		"LS_ADLS_GENERIC_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_GENERIC'"
+		},
+		"LS_SQL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQL'"
+		},
+		"DS_SQL_GENERIC_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuretrainingsqlserver2024.database.windows.net"
+		},
+		"DS_SQL_GENERIC_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azuredb"
+		},
+		"DS_SQL_GENERIC_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin2024"
+		},
 		"LS_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
+		},
+		"LS_ADLS_GENERIC_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
+		},
+		"LS_SQL_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuretrainingsqlserver2024.database.windows.net"
+		},
+		"LS_SQL_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "azuredb"
+		},
+		"LS_SQL_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin2024"
 		},
 		"containerUri": {
 			"type": "string",
@@ -42,11 +82,41 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"DS_SQL_GENERIC_password": {
+						"value": "[parameters('DS_SQL_GENERIC_password')]"
+					},
 					"LS_ADLS_accountKey": {
 						"value": "[parameters('LS_ADLS_accountKey')]"
 					},
+					"LS_ADLS_GENERIC_accountKey": {
+						"value": "[parameters('LS_ADLS_GENERIC_accountKey')]"
+					},
+					"LS_SQL_password": {
+						"value": "[parameters('LS_SQL_password')]"
+					},
+					"DS_SQL_GENERIC_properties_typeProperties_server": {
+						"value": "[parameters('DS_SQL_GENERIC_properties_typeProperties_server')]"
+					},
+					"DS_SQL_GENERIC_properties_typeProperties_database": {
+						"value": "[parameters('DS_SQL_GENERIC_properties_typeProperties_database')]"
+					},
+					"DS_SQL_GENERIC_properties_typeProperties_userName": {
+						"value": "[parameters('DS_SQL_GENERIC_properties_typeProperties_userName')]"
+					},
 					"LS_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('LS_ADLS_properties_typeProperties_url')]"
+					},
+					"LS_ADLS_GENERIC_properties_typeProperties_url": {
+						"value": "[parameters('LS_ADLS_GENERIC_properties_typeProperties_url')]"
+					},
+					"LS_SQL_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_properties_typeProperties_server')]"
+					},
+					"LS_SQL_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_properties_typeProperties_database')]"
+					},
+					"LS_SQL_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_properties_typeProperties_userName')]"
 					}
 				}
 			},
