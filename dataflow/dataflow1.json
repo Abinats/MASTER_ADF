@@ -30,9 +30,6 @@
 				},
 				{
 					"name": "AlterRow1"
-				},
-				{
-					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -45,12 +42,8 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"derivedColumn1 filter(toInteger(CID)%2!=0) ~> filter1",
-				"lookup1 derive(CID = toInteger(CID)) ~> derivedColumn1",
+				"source1 derive(CID = toInteger(CID)) ~> derivedColumn1",
 				"filter1 alterRow() ~> AlterRow1",
-				"source1 lookup(CID == ERROR_FUNCTION(''),",
-				"     multiple: false,",
-				"     pickup: 'first',",
-				"     broadcast: 'auto')~> lookup1",
 				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
