@@ -47,7 +47,7 @@
 				"source1 filter(Color!='Blue') ~> filter1",
 				"filter1 aggregate(groupBy(Name,",
 				"          Color),",
-				"     ListPrice = ERROR_FUNCTION('')) ~> aggregate1"
+				"     ListPrice = max(ListPrice)) ~> aggregate1"
 			]
 		}
 	}
