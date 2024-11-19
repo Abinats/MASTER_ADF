@@ -1,0 +1,163 @@
+{
+	"name": "SCD_TYPE3",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_CUSTOMERDATA_TGT_CSV",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_CUSTOMERDATA_SCDTYPE3",
+						"type": "DatasetReference"
+					},
+					"name": "sourcelookup"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_CUSTOMERDATA_SCDTYPE3",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_CUSTOMERDATA_SCDTYPE3",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "split1"
+				},
+				{
+					"name": "alterRow1"
+				},
+				{
+					"name": "alterRow2"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CID as integer,",
+				"          Name as string,",
+				"          MailID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          CID as integer,",
+				"          Name as string,",
+				"          MailID as string,",
+				"          previous_MailID as string,",
+				"          effective_startdate as date,",
+				"          effective_enddate as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourcelookup",
+				"sourcelookup select(mapColumn(",
+				"          CID_LKP = CID,",
+				"          Name_LKP = Name,",
+				"          MailID_LKP = MailID,",
+				"          previous_MailID_LKP = previous_MailID,",
+				"          effective_startdate_LKP = effective_startdate,",
+				"          effective_enddate_LKP = effective_enddate",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"source1, sourcelookup lookup(source1@CID == sourcelookup@CID",
+				"     && source1@MailID == sourcelookup@MailID",
+				"     && source1@Name == sourcelookup@Name,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 split(isNull(sourcelookup@CID),",
+				"     !isNull(sourcelookup@CID) || (source1@Name !=sourcelookup@Name) || (source1@MailID !=sourcelookup@MailID),",
+				"     disjoint: false) ~> split1@(INSERT, UPDATE)",
+				"split1@INSERT alterRow(insertIf(isInsert())) ~> alterRow1",
+				"split1@UPDATE alterRow(updateIf(isUpdate())) ~> alterRow2",
+				"alterRow1 derive({ effective_startdate} = currentUTC(),",
+				"          effective_enddate = toDate('12-31-9999', 'mm-dd-YYYY')) ~> derivedColumn1",
+				"alterRow2 derive(effective_startdate = currentUTC(),",
+				"          effective_enddate = toDate('12-31-9999', 'mm-dd-YYYY')) ~> derivedColumn2",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CID as integer,",
+				"          Name as string,",
+				"          MailID as string,",
+				"          previous_MailID as string,",
+				"          effective_startdate as date,",
+				"          effective_enddate as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CID = split1@INSERT@CID,",
+				"          Name = split1@INSERT@Name,",
+				"          MailID = split1@INSERT@MailID,",
+				"          MailID = previous_MailID,",
+				"          effective_startdate,",
+				"          effective_enddate",
+				"     )) ~> sink1",
+				"derivedColumn2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CID as integer,",
+				"          Name as string,",
+				"          MailID as string,",
+				"          previous_MailID as string,",
+				"          effective_startdate as date,",
+				"          effective_enddate as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['CID','Name','MailID'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CID = split1@UPDATE@CID,",
+				"          Name = split1@UPDATE@Name,",
+				"          MailID = split1@UPDATE@MailID,",
+				"          MailID = previous_MailID,",
+				"          effective_startdate,",
+				"          effective_enddate",
+				"     )) ~> sink2"
+			]
+		}
+	}
+}

@@ -1,0 +1,42 @@
+{
+	"name": "DS_CUSTOMERDATA_SCDTYPE3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Name",
+				"type": "varchar"
+			},
+			{
+				"name": "MailID",
+				"type": "varchar"
+			},
+			{
+				"name": "previous_MailID",
+				"type": "varchar"
+			},
+			{
+				"name": "effective_startdate",
+				"type": "date"
+			},
+			{
+				"name": "effective_enddate",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "customerdata_scdtype3"
+		}
+	}
+}
