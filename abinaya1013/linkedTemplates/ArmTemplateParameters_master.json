@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "abinaya1013"
 		},
+		"DS_JSON_accountKey": {
+			"value": ""
+		},
 		"DS_SQL_GENERIC_password": {
 			"value": ""
 		},
@@ -16,6 +19,9 @@
 		},
 		"LS_SQL_password": {
 			"value": ""
+		},
+		"DS_JSON_properties_typeProperties_url": {
+			"value": "https://azuretrassig.dfs.core.windows.net/"
 		},
 		"DS_SQL_GENERIC_properties_typeProperties_server": {
 			"value": "azuretrainingsqlserver2024.database.windows.net"
