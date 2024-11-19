@@ -104,7 +104,7 @@
 				"          effective_enddate = toDate('12-31-9999', 'mm-dd-YYYY')) ~> derivedColumn1",
 				"alterRow2 derive(effective_startdate = currentUTC(),",
 				"          previous_MailID = iif(isNull(previous_MailID), split1@UPDATE@MailID, previous_MailID),",
-				"          MailID = split1@UPDATE@MailID,",
+				"          new_MailID = split1@UPDATE@MailID,",
 				"          effective_enddate = toDate('12-31-9999', 'mm-dd-YYYY')) ~> derivedColumn2",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
