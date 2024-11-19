@@ -88,7 +88,7 @@
 				"     broadcast: 'auto')~> lookup1",
 				"lookup1 filter(mod(source1@CID,2)!=0) ~> filter1",
 				"filter1 split(isNull(srclookup@CID),",
-				"     !isNull(srclookup@CID),",
+				"     !isNull(srclookup@CID) || (source1@Name !=srclookup@Name) || (source1@MailID !=srclookup@MailID),",
 				"     disjoint: false) ~> split1@(insert, update)",
 				"split1@insert alterRow(insertIf(isInsert())) ~> alterRow1",
 				"split1@update alterRow(updateIf(isUpdate())) ~> alterRow2",
