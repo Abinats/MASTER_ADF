@@ -4,7 +4,7 @@
 		"globalParameters": {
 			"Filename": {
 				"type": "string",
-				"value": "development"
+				"value": "inputfiles"
 			}
 		}
 	},
