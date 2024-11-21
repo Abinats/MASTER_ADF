@@ -1,0 +1,12 @@
+{
+	"name": "abinaya1013",
+	"properties": {
+		"globalParameters": {
+			"prodfilepath": {
+				"type": "string",
+				"value": "development"
+			}
+		}
+	},
+	"location": "eastus"
+}
