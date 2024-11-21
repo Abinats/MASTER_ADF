@@ -62,7 +62,13 @@
 				"outputs": [
 					{
 						"referenceName": "DS_CSV_TARGET",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": {
+								"value": "@pipeline().parameters.FilenamePL",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
