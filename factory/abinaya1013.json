@@ -2,7 +2,7 @@
 	"name": "abinaya1013",
 	"properties": {
 		"globalParameters": {
-			"prodfilepath": {
+			"Filename": {
 				"type": "string",
 				"value": "development"
 			}
