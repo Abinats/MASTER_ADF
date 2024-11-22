@@ -2136,7 +2136,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "PL_csv_EMP",
@@ -2149,6 +2149,38 @@
 					"frequency": "Minute",
 					"interval": 8,
 					"startTime": "2024-11-22T23:00:00Z",
+					"endTime": "2024-11-22T23:05:09Z",
+					"delay": "00:00:00",
+					"maxConcurrency": 50,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_csv_EMP')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TUMBLING_WINDOW2')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "PL_csv_EMP",
+						"type": "PipelineReference"
+					},
+					"parameters": {}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 5,
+					"startTime": "2024-11-22T23:15:00Z",
 					"delay": "00:00:00",
 					"maxConcurrency": 50,
 					"retryPolicy": {
