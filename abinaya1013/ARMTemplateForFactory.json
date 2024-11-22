@@ -89,7 +89,53 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_')]",
+			"name": "[concat(parameters('factoryName'), '/PL_ADV_QUES1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ADV_QUESTION1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "ADV_QUESTION1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/ADV_QUESTION1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_CUSTOMERDATA')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -157,52 +203,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_CUSTOMERDATA')]",
 				"[concat(variables('factoryId'), '/datasets/DS_CUSTOMERDATA_TGT_CSV')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_ADV_QUES1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ADV_QUESTION1",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "ADV_QUESTION1",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/ADV_QUESTION1')]"
 			]
 		},
 		{
@@ -601,23 +601,6 @@
 								"parameters": {}
 							}
 						]
-					},
-					{
-						"name": "PL_STORAGE_TRIGGERS_PARAM",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"policy": {
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_STORAGE_TRIGGERS_PARAM",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
 					}
 				],
 				"policy": {
@@ -627,8 +610,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_CSV')]",
-				"[concat(variables('factoryId'), '/datasets/DS_CSV_TGT')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_STORAGE_TRIGGERS_PARAM')]"
+				"[concat(variables('factoryId'), '/datasets/DS_CSV_TGT')]"
 			]
 		},
 		{
