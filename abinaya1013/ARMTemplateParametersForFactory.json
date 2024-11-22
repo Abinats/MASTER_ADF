@@ -17,6 +17,9 @@
 		"LS_ADLS_GENERIC_accountKey": {
 			"value": ""
 		},
+		"LS_PARAM_accountKey": {
+			"value": ""
+		},
 		"LS_SQL_password": {
 			"value": ""
 		},
@@ -38,6 +41,9 @@
 		"LS_ADLS_GENERIC_properties_typeProperties_url": {
 			"value": "https://azuretrassig.dfs.core.windows.net/"
 		},
+		"LS_PARAM_properties_typeProperties_url": {
+			"value": "https://azuretrassig.dfs.core.windows.net/"
+		},
 		"LS_SQL_properties_typeProperties_server": {
 			"value": "azuretrainingsqlserver2024.database.windows.net"
 		},
@@ -46,6 +52,15 @@
 		},
 		"LS_SQL_properties_typeProperties_userName": {
 			"value": "admin2024"
+		},
+		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname": {
+			"value": "@triggerBody().fileName"
+		},
+		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_cname": {
+			"value": "@triggerBody().folderPath"
+		},
+		"storage_event_trigger_dept_properties_typeProperties_scope": {
+			"value": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
 		}
 	}
 }

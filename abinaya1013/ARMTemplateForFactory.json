@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_GENERIC'"
 		},
+		"LS_PARAM_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_PARAM'"
+		},
 		"LS_SQL_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SQL'"
@@ -51,6 +55,10 @@
 			"type": "string",
 			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
 		},
+		"LS_PARAM_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
+		},
 		"LS_SQL_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "azuretrainingsqlserver2024.database.windows.net"
@@ -62,6 +70,18 @@
 		"LS_SQL_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "admin2024"
+		},
+		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_cname": {
+			"type": "string",
+			"defaultValue": "@triggerBody().folderPath"
+		},
+		"storage_event_trigger_dept_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
 		}
 	},
 	"variables": {
@@ -140,6 +160,52 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_ADV_QUES1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ADV_QUESTION1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "ADV_QUESTION1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/ADV_QUESTION1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_CUSTOMERDATASQL_CSV')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -208,6 +274,98 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_CUSTOMERDATA')]",
 				"[concat(variables('factoryId'), '/datasets/DS_CUSTOMERDATA_TGT_CSV')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_PARAM')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_CSV_PARAM",
+								"type": "DatasetReference",
+								"parameters": {
+									"FileName": {
+										"value": "@pipeline().parameters.FilenamePL",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_CSV_TARGET",
+								"type": "DatasetReference",
+								"parameters": {
+									"FileName": {
+										"value": "@pipeline().parameters.FilenamePL",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"FilenamePL": {
+						"type": "string"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_CSV_PARAM')]",
+				"[concat(variables('factoryId'), '/datasets/DS_CSV_TARGET')]"
 			]
 		},
 		{
@@ -362,14 +520,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"name": "[concat(parameters('factoryName'), '/PL_STORAGE_TRIGGERS_PARAM')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ADV_QUESTION1",
-						"type": "ExecuteDataFlow",
+						"name": "Copy data1",
+						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -380,31 +538,79 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"dataflow": {
-								"referenceName": "ADV_QUESTION1",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"sink1": {}
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
 								}
 							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
 							},
-							"traceLevel": "Fine"
-						}
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_CSV_TRIGGERS_SRC",
+								"type": "DatasetReference",
+								"parameters": {
+									"FileName": {
+										"value": "@pipeline().parameters.fname",
+										"type": "Expression"
+									},
+									"ContainerName": {
+										"value": "@pipeline().parameters.cname",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_TRIGGERS_CSV_TGT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"parameters": {
+					"fname": {
+						"type": "string"
+					},
+					"cname": {
+						"type": "string"
+					}
+				},
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/ADV_QUESTION1')]"
+				"[concat(variables('factoryId'), '/datasets/DS_CSV_TRIGGERS_SRC')]",
+				"[concat(variables('factoryId'), '/datasets/DS_TRIGGERS_CSV_TGT')]"
 			]
 		},
 		{
@@ -622,6 +828,79 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_CSV_PARAM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_PARAM",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "string",
+						"defaultValue": "dept.csv"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"fileSystem": "inputfilesparam"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_PARAM')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_CSV_TARGET')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLS",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"fileSystem": "destinationfilesparam"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_ADLS')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_CSV_TGT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -677,6 +956,53 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "CustomerData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_SQL')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_CUSTOMERDATA_SCDTYPE3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "MailID",
+						"type": "varchar"
+					},
+					{
+						"name": "previous_MailID",
+						"type": "varchar"
+					},
+					{
+						"name": "effective_startdate",
+						"type": "date"
+					},
+					{
+						"name": "effective_enddate",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "customerdata_scdtype3"
 				}
 			},
 			"dependsOn": [
@@ -1127,6 +1453,23 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/LS_PARAM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_PARAM_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_PARAM_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/LS_SQL')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1147,6 +1490,141 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADVANCE_QUESTION1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT_CSV",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						},
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT",
+								"type": "DatasetReference"
+							},
+							"name": "srclookup"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						},
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT",
+								"type": "DatasetReference"
+							},
+							"name": "sink2"
+						}
+					],
+					"transformations": [
+						{
+							"name": "select1"
+						},
+						{
+							"name": "lookup1"
+						},
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "split1"
+						},
+						{
+							"name": "alterRow1"
+						},
+						{
+							"name": "alterRow2"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> source1",
+						"source(output(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> srclookup",
+						"srclookup select(mapColumn(",
+						"          CID_lkp = CID,",
+						"          Name_lkp = Name,",
+						"          MailID_lkp = MailID",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"source1, srclookup lookup(source1@CID == srclookup@CID",
+						"     && source1@MailID == srclookup@MailID",
+						"     && source1@Name == srclookup@Name,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookup1",
+						"lookup1 filter(mod(source1@CID,2)!=0) ~> filter1",
+						"filter1 split(isNull(srclookup@CID),",
+						"     !isNull(srclookup@CID) || (source1@Name !=srclookup@Name) || (source1@MailID !=srclookup@MailID),",
+						"     disjoint: false) ~> split1@(insert, update)",
+						"split1@insert alterRow(insertIf(isInsert())) ~> alterRow1",
+						"split1@update alterRow(updateIf(isUpdate())) ~> alterRow2",
+						"alterRow1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+						"alterRow2 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:false,",
+						"     updateable:true,",
+						"     upsertable:false,",
+						"     keys:['CID','Name','MailID'],",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_CUSTOMERDATA_TGT_CSV')]",
+				"[concat(variables('factoryId'), '/datasets/DS_CUSTOMERDATA_TGT')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ADV_QUESTION1')]",
@@ -1361,141 +1839,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADVANCE_QUESTION1')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "DS_CUSTOMERDATA_TGT_CSV",
-								"type": "DatasetReference"
-							},
-							"name": "source1"
-						},
-						{
-							"dataset": {
-								"referenceName": "DS_CUSTOMERDATA_TGT",
-								"type": "DatasetReference"
-							},
-							"name": "srclookup"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "DS_CUSTOMERDATA_TGT",
-								"type": "DatasetReference"
-							},
-							"name": "sink1"
-						},
-						{
-							"dataset": {
-								"referenceName": "DS_CUSTOMERDATA_TGT",
-								"type": "DatasetReference"
-							},
-							"name": "sink2"
-						}
-					],
-					"transformations": [
-						{
-							"name": "select1"
-						},
-						{
-							"name": "lookup1"
-						},
-						{
-							"name": "filter1"
-						},
-						{
-							"name": "split1"
-						},
-						{
-							"name": "alterRow1"
-						},
-						{
-							"name": "alterRow2"
-						}
-					],
-					"scriptLines": [
-						"source(output(",
-						"          CID as integer,",
-						"          Name as string,",
-						"          MailID as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> source1",
-						"source(output(",
-						"          CID as integer,",
-						"          Name as string,",
-						"          MailID as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     isolationLevel: 'READ_UNCOMMITTED',",
-						"     format: 'table') ~> srclookup",
-						"srclookup select(mapColumn(",
-						"          CID_lkp = CID,",
-						"          Name_lkp = Name,",
-						"          MailID_lkp = MailID",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> select1",
-						"source1, srclookup lookup(source1@CID == srclookup@CID",
-						"     && source1@MailID == srclookup@MailID",
-						"     && source1@Name == srclookup@Name,",
-						"     multiple: false,",
-						"     pickup: 'any',",
-						"     broadcast: 'auto')~> lookup1",
-						"lookup1 filter(mod(source1@CID,2)!=0) ~> filter1",
-						"filter1 split(isNull(srclookup@CID),",
-						"     !isNull(srclookup@CID) || (source1@Name !=srclookup@Name) || (source1@MailID !=srclookup@MailID),",
-						"     disjoint: false) ~> split1@(insert, update)",
-						"split1@insert alterRow(insertIf(isInsert())) ~> alterRow1",
-						"split1@update alterRow(updateIf(isUpdate())) ~> alterRow2",
-						"alterRow1 sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     input(",
-						"          CID as integer,",
-						"          Name as string,",
-						"          MailID as string",
-						"     ),",
-						"     deletable:false,",
-						"     insertable:true,",
-						"     updateable:false,",
-						"     upsertable:false,",
-						"     format: 'table',",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
-						"alterRow2 sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     input(",
-						"          CID as integer,",
-						"          Name as string,",
-						"          MailID as string",
-						"     ),",
-						"     deletable:false,",
-						"     insertable:false,",
-						"     updateable:true,",
-						"     upsertable:false,",
-						"     keys:['CID','Name','MailID'],",
-						"     format: 'table',",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_CUSTOMERDATA_TGT_CSV')]",
-				"[concat(variables('factoryId'), '/datasets/DS_CUSTOMERDATA_TGT')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/SCD_TYPE3')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -1603,7 +1946,7 @@
 						"          effective_enddate = toDate('12-31-9999', 'mm-dd-YYYY')) ~> derivedColumn1",
 						"alterRow2 derive(effective_startdate = currentUTC(),",
 						"          previous_MailID = iif(isNull(previous_MailID), split1@UPDATE@MailID, previous_MailID),",
-						"          MailID = split1@UPDATE@MailID,",
+						"          new_MailID = split1@UPDATE@MailID,",
 						"          effective_enddate = toDate('12-31-9999', 'mm-dd-YYYY')) ~> derivedColumn2",
 						"derivedColumn1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
@@ -1667,50 +2010,124 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_CUSTOMERDATA_SCDTYPE3')]",
+			"name": "[concat(parameters('factoryName'), '/DS_CSV_TRIGGERS_SRC')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "LS_SQL",
+					"referenceName": "LS_ADLS",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					},
+					"ContainerName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().ContainerName",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "DEPARTMENT_ID",
+						"type": "String"
+					},
+					{
+						"name": "DEPARTMENT_NAME",
+						"type": "String"
+					},
+					{
+						"name": "MANAGER_ID",
+						"type": "String"
+					},
+					{
+						"name": "LOCATION_ID",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_ADLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_TRIGGERS_CSV_TGT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ADLS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "CID",
-						"type": "int",
-						"precision": 10
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "destinationfiles"
 					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_ADLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/storage_event_trigger_dept')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
 					{
-						"name": "Name",
-						"type": "varchar"
-					},
-					{
-						"name": "MailID",
-						"type": "varchar"
-					},
-					{
-						"name": "previous_MailID",
-						"type": "varchar"
-					},
-					{
-						"name": "effective_startdate",
-						"type": "date"
-					},
-					{
-						"name": "effective_enddate",
-						"type": "date"
+						"pipelineReference": {
+							"referenceName": "PL_STORAGE_TRIGGERS_PARAM",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"fname": "[parameters('storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname')]",
+							"cname": "[parameters('storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_cname')]"
+						}
 					}
 				],
+				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "customerdata_scdtype3"
+					"blobPathBeginsWith": "/sourcefiles/blobs/dept",
+					"blobPathEndsWith": ".csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('storage_event_trigger_dept_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated",
+						"Microsoft.Storage.BlobDeleted"
+					]
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_SQL')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_STORAGE_TRIGGERS_PARAM')]"
 			]
 		}
 	]

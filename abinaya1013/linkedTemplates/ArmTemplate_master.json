@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_GENERIC'"
 		},
+		"LS_PARAM_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_PARAM'"
+		},
 		"LS_SQL_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SQL'"
@@ -51,6 +55,10 @@
 			"type": "string",
 			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
 		},
+		"LS_PARAM_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
+		},
 		"LS_SQL_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "azuretrainingsqlserver2024.database.windows.net"
@@ -62,6 +70,18 @@
 		"LS_SQL_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "admin2024"
+		},
+		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_cname": {
+			"type": "string",
+			"defaultValue": "@triggerBody().folderPath"
+		},
+		"storage_event_trigger_dept_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
 		},
 		"containerUri": {
 			"type": "string",
@@ -102,6 +122,9 @@
 					"LS_ADLS_GENERIC_accountKey": {
 						"value": "[parameters('LS_ADLS_GENERIC_accountKey')]"
 					},
+					"LS_PARAM_accountKey": {
+						"value": "[parameters('LS_PARAM_accountKey')]"
+					},
 					"LS_SQL_password": {
 						"value": "[parameters('LS_SQL_password')]"
 					},
@@ -122,6 +145,9 @@
 					},
 					"LS_ADLS_GENERIC_properties_typeProperties_url": {
 						"value": "[parameters('LS_ADLS_GENERIC_properties_typeProperties_url')]"
+					},
+					"LS_PARAM_properties_typeProperties_url": {
+						"value": "[parameters('LS_PARAM_properties_typeProperties_url')]"
 					},
 					"LS_SQL_properties_typeProperties_server": {
 						"value": "[parameters('LS_SQL_properties_typeProperties_server')]"
@@ -149,6 +175,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname": {
+						"value": "[parameters('storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname')]"
+					},
+					"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_cname": {
+						"value": "[parameters('storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_cname')]"
+					},
+					"storage_event_trigger_dept_properties_typeProperties_scope": {
+						"value": "[parameters('storage_event_trigger_dept_properties_typeProperties_scope')]"
 					}
 				}
 			},

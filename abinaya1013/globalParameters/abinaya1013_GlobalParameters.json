@@ -1,1 +1,6 @@
-{}
+{
+	"Filename": {
+		"type": "string",
+		"value": "inputfiles"
+	}
+}
