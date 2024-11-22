@@ -31,16 +31,26 @@
 				"inputs": [
 					{
 						"referenceName": "DS_CSV_TRIGGERS_SRC",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": {
+								"value": "@pipeline().parameters.fname",
+								"type": "Expression"
+							},
+							"ContainerName": {
+								"value": "@pipeline().parameters.cname",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
 		"parameters": {
-			"filename": {
+			"fname": {
 				"type": "string"
 			},
-			"containername": {
+			"cname": {
 				"type": "string"
 			}
 		},
