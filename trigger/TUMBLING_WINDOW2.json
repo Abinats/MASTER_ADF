@@ -2,7 +2,7 @@
 	"name": "TUMBLING_WINDOW2",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "PL_csv_EMP",
