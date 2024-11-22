@@ -59,22 +59,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "PL_STORAGE_TRIGGERS_PARAM",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
-				"policy": {
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_STORAGE_TRIGGERS_PARAM",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
 			}
 		],
 		"annotations": []
