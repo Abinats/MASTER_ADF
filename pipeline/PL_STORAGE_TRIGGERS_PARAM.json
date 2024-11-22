@@ -39,6 +39,9 @@
 		"parameters": {
 			"filename": {
 				"type": "string"
+			},
+			"containername": {
+				"type": "string"
 			}
 		},
 		"annotations": []
