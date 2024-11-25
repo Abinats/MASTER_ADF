@@ -61,7 +61,10 @@
 							"outputs": [
 								{
 									"referenceName": "ds_json_api5",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": "india"
+									}
 								}
 							]
 						}
