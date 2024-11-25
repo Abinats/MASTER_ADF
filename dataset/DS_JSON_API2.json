@@ -18,7 +18,8 @@
 				"fileName": {
 					"value": "@concat(dataset().filename,'.json')",
 					"type": "Expression"
-				}
+				},
+				"fileSystem": "target"
 			}
 		},
 		"schema": {}
