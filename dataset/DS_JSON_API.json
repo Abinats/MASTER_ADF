@@ -1,0 +1,22 @@
+{
+	"name": "DS_JSON_API",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DS_JSON",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation"
+			}
+		},
+		"schema": {}
+	}
+}
