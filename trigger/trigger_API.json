@@ -3,18 +3,7 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [
-			{
-				"pipelineReference": {
-					"referenceName": "PL_API_QUESTION2_6_FAILURE",
-					"type": "PipelineReference"
-				},
-				"parameters": {
-					"fname": "india.json",
-					"cname": "targetapi"
-				}
-			}
-		],
+		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
