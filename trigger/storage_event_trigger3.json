@@ -8,6 +8,10 @@
 				"pipelineReference": {
 					"referenceName": "PL_API_QUESTION4",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"fname": "@triggerBody().fileName",
+					"cname": "@triggerBody().folderPath"
 				}
 			}
 		],
