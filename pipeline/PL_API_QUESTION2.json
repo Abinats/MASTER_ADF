@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_API_QUESTION2",
 	"properties": {
 		"activities": [
 			{
@@ -56,7 +56,13 @@
 							"outputs": [
 								{
 									"referenceName": "DS_JSON_API",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@concat(item(),'.json')",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
