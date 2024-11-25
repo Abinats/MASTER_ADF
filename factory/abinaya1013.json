@@ -5,6 +5,10 @@
 			"Filename": {
 				"type": "string",
 				"value": "inputfiles"
+			},
+			"item": {
+				"type": "string",
+				"value": "india"
 			}
 		}
 	},
