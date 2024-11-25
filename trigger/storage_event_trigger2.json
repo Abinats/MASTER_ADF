@@ -10,8 +10,8 @@
 					"type": "PipelineReference"
 				},
 				"parameters": {
-					"fname": "india.json",
-					"cname": "targetapi"
+					"fname": "@triggerBody().fileName",
+					"cname": "@triggerBody().filePath"
 				}
 			}
 		],
