@@ -87,7 +87,17 @@
 									]
 								}
 							],
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"message": {
+									"value": "PIPELINE FAILS",
+									"type": "Expression"
+								},
+								"errorCode": {
+									"value": "4000",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
