@@ -6,7 +6,14 @@
 				"name": "ForEach1",
 				"type": "ForEach",
 				"dependsOn": [],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "[\"india\", \"us\", \"uk\", \"china\", \"russia\"]\n",
+						"type": "Expression"
+					},
+					"batchCount": 0
+				}
 			}
 		],
 		"annotations": []
