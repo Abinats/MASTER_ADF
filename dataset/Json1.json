@@ -16,7 +16,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@countries/concat(dataset().filename.'.json')",
+					"value": "@concat(dataset().filename,'.json')",
 					"type": "Expression"
 				},
 				"folderPath": "API_FILES",
