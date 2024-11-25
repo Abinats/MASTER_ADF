@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "[\"india\", \"us\", \"uk\", \"china\", \"russia\"]\n",
+						"value": "(\"india, us, uk, china, russia\")\n\n",
 						"type": "Expression"
 					},
 					"batchCount": 0
