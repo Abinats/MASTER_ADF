@@ -8,6 +8,10 @@
 				"pipelineReference": {
 					"referenceName": "PL_API_QUESTION3",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"fname": "india.json",
+					"cname": "targetapi"
 				}
 			}
 		],
