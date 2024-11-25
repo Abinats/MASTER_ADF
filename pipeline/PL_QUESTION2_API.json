@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_QUESTION2_API",
 	"properties": {
 		"activities": [
 			{
@@ -42,7 +42,7 @@
 									"referenceName": "DS_REST_API_ITEM",
 									"type": "DatasetReference",
 									"parameters": {
-										"filename": "india"
+										"item": "india"
 									}
 								}
 							]
