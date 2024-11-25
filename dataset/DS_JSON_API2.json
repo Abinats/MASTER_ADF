@@ -8,9 +8,6 @@
 		"parameters": {
 			"filename": {
 				"type": "string"
-			},
-			"folderpath": {
-				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -22,10 +19,7 @@
 					"value": "@concat(dataset().filename,'.json')",
 					"type": "Expression"
 				},
-				"folderPath": {
-					"value": "@concat(dataset().folderpath,'-files')",
-					"type": "Expression"
-				},
+				"folderPath": "API",
 				"fileSystem": "target"
 			}
 		},
