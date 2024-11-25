@@ -1,0 +1,29 @@
+{
+	"name": "trigger_API",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_API_QUESTION2_6_FAILURE",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"fname": "india.json",
+					"cname": "targetapi"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2024-11-26T00:00:00",
+				"endTime": "2024-11-26T12:00:00",
+				"timeZone": "US Mountain Standard Time"
+			}
+		}
+	}
+}
