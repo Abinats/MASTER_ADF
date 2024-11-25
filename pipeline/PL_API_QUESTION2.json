@@ -12,7 +12,7 @@
 						"value": "@activity('Copy data1').output.value",
 						"type": "Expression"
 					},
-					"batchCount": 0,
+					"batchCount": 1,
 					"activities": [
 						{
 							"name": "Copy data1",
