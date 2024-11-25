@@ -64,11 +64,15 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@pipeline().parameters.fname",
+											"value": "india",
 											"type": "Expression"
 										},
 										"containername": {
 											"value": "@pipeline().parameters.cname",
+											"type": "Expression"
+										},
+										"file": {
+											"value": "@pipeline().parameters.fname",
 											"type": "Expression"
 										}
 									}
