@@ -58,7 +58,10 @@
 							"outputs": [
 								{
 									"referenceName": "Json1",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": "india"
+									}
 								}
 							]
 						}
