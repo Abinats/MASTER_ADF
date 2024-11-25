@@ -40,7 +40,13 @@
 							"inputs": [
 								{
 									"referenceName": "DS_RESTAPI",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"item": {
+											"value": "india",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
