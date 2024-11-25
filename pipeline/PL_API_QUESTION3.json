@@ -63,7 +63,14 @@
 									"referenceName": "ds_json_api5",
 									"type": "DatasetReference",
 									"parameters": {
-										"filename": "india"
+										"filename": {
+											"value": "@pipeline().parameters.fname",
+											"type": "Expression"
+										},
+										"containername": {
+											"value": "@pipeline().parameters.cname",
+											"type": "Expression"
+										}
 									}
 								}
 							]
