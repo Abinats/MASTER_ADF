@@ -60,7 +60,7 @@
 									"referenceName": "DS_JSON_API2",
 									"type": "DatasetReference",
 									"parameters": {
-										"filename": "uk_"
+										"filename": "uk"
 									}
 								}
 							]
