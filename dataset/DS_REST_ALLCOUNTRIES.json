@@ -1,0 +1,12 @@
+{
+	"name": "DS_REST_ALLCOUNTRIES",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestService1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
