@@ -96,6 +96,15 @@
 										"type": "JsonReadSettings"
 									}
 								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
 								"enableStaging": false
 							},
 							"inputs": [
@@ -106,8 +115,18 @@
 										"filename": {
 											"value": "@pipeline().parameters.fname",
 											"type": "Expression"
+										},
+										"containername": {
+											"value": "@pipeline().parameters.cname",
+											"type": "Expression"
 										}
 									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_JSON_TGT",
+									"type": "DatasetReference"
 								}
 							]
 						}
