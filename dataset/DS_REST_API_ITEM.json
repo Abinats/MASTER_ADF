@@ -5,12 +5,6 @@
 			"referenceName": "RestService2",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"items": {
-				"type": "string",
-				"defaultValue": "india"
-			}
-		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
