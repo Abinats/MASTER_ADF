@@ -1,32 +1,6 @@
 {
 	"name": "pipeline1",
 	"properties": {
-		"activities": [
-			{
-				"name": "Execute Pipeline1",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
-				"policy": {
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_QUESTION2_API",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			}
-		],
-		"parameters": {
-			"fname": {
-				"type": "string"
-			},
-			"cname": {
-				"type": "string"
-			}
-		},
 		"annotations": []
 	}
 }
