@@ -40,7 +40,10 @@
 							"inputs": [
 								{
 									"referenceName": "DS_REST_API_ITEM",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": "india"
+									}
 								}
 							]
 						}
