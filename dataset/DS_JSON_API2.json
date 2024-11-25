@@ -23,7 +23,7 @@
 					"type": "Expression"
 				},
 				"folderPath": {
-					"value": "@dataset().folderpath",
+					"value": "@concat(dataset().folderpath,'-API')",
 					"type": "Expression"
 				},
 				"fileSystem": "target"
