@@ -60,7 +60,8 @@
 									"referenceName": "DS_JSON_API2",
 									"type": "DatasetReference",
 									"parameters": {
-										"filename": "india_json"
+										"filename": "india_",
+										"folderpath": "API"
 									}
 								}
 							]
