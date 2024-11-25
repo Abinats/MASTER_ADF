@@ -70,11 +70,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"items": {
-				"type": "string"
-			}
-		},
 		"annotations": []
 	}
 }
