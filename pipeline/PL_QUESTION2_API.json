@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "[\"india\",\"uk\",\"china\",\"russia\"]\n\n",
+						"value": "@activity('Copy data1').output.value",
 						"type": "Expression"
 					},
 					"activities": [
