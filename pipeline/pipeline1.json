@@ -35,6 +35,15 @@
 										"supportRFC5988": "true"
 									}
 								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
 								"enableStaging": false
 							},
 							"inputs": [
@@ -47,6 +56,12 @@
 											"type": "Expression"
 										}
 									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_json_api5",
+									"type": "DatasetReference"
 								}
 							]
 						}
