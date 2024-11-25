@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "[\"india\",\"us\",\"uk\",\"china\",\"russia\"]",
+						"value": "@createArray('india','us','uk','china','russia')",
 						"type": "Expression"
 					},
 					"activities": [
@@ -32,7 +32,7 @@
 									"requestInterval": "00.00:00:00.010",
 									"requestMethod": "GET",
 									"paginationRules": {
-										"": ""
+										"supportRFC5988": "true"
 									}
 								},
 								"sink": {
