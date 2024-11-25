@@ -101,7 +101,13 @@
 							"inputs": [
 								{
 									"referenceName": "ds_json4",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@pipeline().parameters.fname",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
