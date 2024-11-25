@@ -69,6 +69,14 @@
 				}
 			}
 		],
+		"parameters": {
+			"fname": {
+				"type": "string"
+			},
+			"cname": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
