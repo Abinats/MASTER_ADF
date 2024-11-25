@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "PL_API_QUESTION2_3_6",
+					"referenceName": "PL_API_QUESTION2_6",
 					"type": "PipelineReference"
 				},
 				"parameters": {
