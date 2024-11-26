@@ -51,7 +51,7 @@
 									"referenceName": "DS_RESTAPI_COUNTRYNAME",
 									"type": "DatasetReference",
 									"parameters": {
-										"item": "us"
+										"item": "usa"
 									}
 								}
 							],
