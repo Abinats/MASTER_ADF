@@ -1,0 +1,17 @@
+{
+	"name": "DS_RESTAPI_COUNTRYNAME",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DS_REST_API2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"item": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}

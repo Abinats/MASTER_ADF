@@ -39,7 +39,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "DS_REST_ALLCOUNTRIES",
+									"referenceName": "DS_RESTAPI_COUNTRYNAME",
 									"type": "DatasetReference"
 								}
 							]
