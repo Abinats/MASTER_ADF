@@ -1,5 +1,5 @@
 {
-	"name": "PL_API_QUESTION4_copy1",
+	"name": "PL_API_QUESTION4_5",
 	"properties": {
 		"activities": [
 			{
@@ -52,7 +52,7 @@
 									"referenceName": "DS_RESTAPI_COUNTRYNAME",
 									"type": "DatasetReference",
 									"parameters": {
-										"item": "honolulu"
+										"item": "russia"
 									}
 								}
 							],
