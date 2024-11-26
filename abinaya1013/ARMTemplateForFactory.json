@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_GENERIC'"
 		},
+		"LS_API_PARQUET_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_API_PARQUET'"
+		},
 		"LS_PARAM_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_PARAM'"
@@ -34,6 +38,10 @@
 		"DS_JSON_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
+		},
+		"DS_REST_API2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://restcountries.com/v3.1/name"
 		},
 		"DS_SQL_GENERIC_properties_typeProperties_server": {
 			"type": "string",
@@ -55,9 +63,17 @@
 			"type": "string",
 			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
 		},
+		"LS_API_PARQUET_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
+		},
 		"LS_PARAM_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
+		},
+		"LS_REST_API2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://restcountries.com/v3.1/name"
 		},
 		"LS_SQL_properties_typeProperties_server": {
 			"type": "string",
@@ -70,6 +86,34 @@
 		"LS_SQL_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "admin2024"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://restcountries.com/v3.1/all"
+		},
+		"RestService2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://restcountries.com/v3.1/name"
+		},
+		"storage_event-trigger3_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
+		},
+		"storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_fname": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_cname": {
+			"type": "string",
+			"defaultValue": "@triggerBody().filePath"
+		},
+		"storage_event_trigger2_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
+		},
+		"storage_event_trigger3_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
 		},
 		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname": {
 			"type": "string",
@@ -128,10 +172,306 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "ASSIGNMENT_6"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/ADV_QUESTION1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_API_PARQUET_QUESTION1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_REST_ALLCOUNTRIES",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_APRQUET_API",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"items": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ASSIGNMENT_6"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_REST_ALLCOUNTRIES')]",
+				"[concat(variables('factoryId'), '/datasets/DS_APRQUET_API')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_API_QUESTION2_6')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@createArray('india','us','uk','china','russia')",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "RestSource",
+											"httpRequestTimeout": "00:01:40",
+											"requestInterval": "00.00:00:00.010",
+											"requestMethod": "GET",
+											"paginationRules": {
+												"supportRFC5988": "true"
+											}
+										},
+										"sink": {
+											"type": "JsonSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "JsonWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "DS_RESTAPI",
+											"type": "DatasetReference",
+											"parameters": {
+												"item": "india",
+												"filename": {
+													"value": "@pipeline().parameters.fname",
+													"type": "Expression"
+												},
+												"containername": {
+													"value": "@pipeline().parameters.cname",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ds_json_api5",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": {
+													"value": "india",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"fname": {
+						"type": "string"
+					},
+					"cname": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "ASSIGNMENT_6"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_RESTAPI')]",
+				"[concat(variables('factoryId'), '/datasets/ds_json_api5')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_API_QUESTION4')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@createArray('india','us','uk','china','russia')",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "RestSource",
+											"httpRequestTimeout": "00:01:40",
+											"requestInterval": "00.00:00:00.010",
+											"requestMethod": "GET",
+											"paginationRules": {
+												"supportRFC5988": "true"
+											}
+										},
+										"sink": {
+											"type": "JsonSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "JsonWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "DS_RESTAPI_COUNTRYNAME",
+											"type": "DatasetReference",
+											"parameters": {
+												"item": "honolulu"
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DS_JSON_API3",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": "russia"
+											}
+										}
+									]
+								}
+							]
+						}
+					},
+					{
+						"name": "SendEmail",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "ForEach1",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {},
+							"url": "https://prod-09.centralus.logic.azure.com:443/workflows/460679c58d42469e9984f296d63adf7e/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=Gx--VKujVGb1SEUx8xjQtE-H1Yock8gk1g8q2HSYjlA",
+							"body": {
+								"value": "{\n\"PipelineName\":\"@{pipeline().pipeline}\",\n\"DataFactoryName\": \"@{pipeline().DataFactory}\",\n\"RunIDs\":\"@{pipeline().RunId}\",\n\"ErrorMessage\": \"@{activity('Copy data1').output.errors[0].Message}\",\n}\n",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "ASSIGNMENT_6"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_RESTAPI_COUNTRYNAME')]",
+				"[concat(variables('factoryId'), '/datasets/DS_JSON_API3')]"
 			]
 		},
 		{
@@ -443,6 +783,97 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_QUESTION2_API')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@createArray('india','us','uk','china','russia')",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "RestSource",
+											"httpRequestTimeout": "00:01:40",
+											"requestInterval": "00.00:00:00.010",
+											"requestMethod": "GET",
+											"paginationRules": {
+												"supportRFC5988": "true"
+											}
+										},
+										"sink": {
+											"type": "JsonSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "JsonWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "DS_REST_API_ITEM",
+											"type": "DatasetReference",
+											"parameters": {
+												"item": "uk"
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DS_JSON_API2",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": "uk"
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"items": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ASSIGNMENT_6"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_REST_API_ITEM')]",
+				"[concat(variables('factoryId'), '/datasets/DS_JSON_API2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_STORAGE_TRIGGERS_PARAM')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -611,6 +1042,31 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_CSV')]",
 				"[concat(variables('factoryId'), '/datasets/DS_CSV_TGT')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_APRQUET_API')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_API_PARQUET",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "PARQUET",
+						"fileSystem": "target"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_API_PARQUET')]"
 			]
 		},
 		{
@@ -1157,6 +1613,1529 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_JSON_API')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_JSON",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						}
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DS_JSON')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_JSON_API2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_JSON",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(dataset().filename,'.json')",
+							"type": "Expression"
+						},
+						"folderPath": "API",
+						"fileSystem": "target"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DS_JSON')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_JSON_API3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_JSON",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(dataset().filename,'.json')",
+							"type": "Expression"
+						},
+						"fileSystem": "targetapi"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "object",
+							"properties": {
+								"common": {
+									"type": "string"
+								},
+								"official": {
+									"type": "string"
+								},
+								"nativeName": {
+									"type": "object",
+									"properties": {
+										"eng": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"hin": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"tam": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"tld": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"cca2": {
+							"type": "string"
+						},
+						"ccn3": {
+							"type": "string"
+						},
+						"cca3": {
+							"type": "string"
+						},
+						"cioc": {
+							"type": "string"
+						},
+						"independent": {
+							"type": "boolean"
+						},
+						"status": {
+							"type": "string"
+						},
+						"unMember": {
+							"type": "boolean"
+						},
+						"currencies": {
+							"type": "object",
+							"properties": {
+								"INR": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"USD": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"idd": {
+							"type": "object",
+							"properties": {
+								"root": {
+									"type": "string"
+								},
+								"suffixes": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"capital": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"altSpellings": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"region": {
+							"type": "string"
+						},
+						"subregion": {
+							"type": "string"
+						},
+						"languages": {
+							"type": "object",
+							"properties": {
+								"eng": {
+									"type": "string"
+								},
+								"hin": {
+									"type": "string"
+								},
+								"tam": {
+									"type": "string"
+								}
+							}
+						},
+						"translations": {
+							"type": "object",
+							"properties": {
+								"ara": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"bre": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"ces": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"cym": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"deu": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"est": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"fin": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"fra": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"hrv": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"hun": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"ita": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"jpn": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"kor": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"nld": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"per": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"pol": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"por": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"rus": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"slk": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"spa": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"srp": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"swe": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"tur": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"urd": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"zho": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"latlng": {
+							"type": "array",
+							"items": {
+								"type": "number"
+							}
+						},
+						"landlocked": {
+							"type": "boolean"
+						},
+						"borders": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"area": {
+							"type": "number"
+						},
+						"demonyms": {
+							"type": "object",
+							"properties": {
+								"eng": {
+									"type": "object",
+									"properties": {
+										"f": {
+											"type": "string"
+										},
+										"m": {
+											"type": "string"
+										}
+									}
+								},
+								"fra": {
+									"type": "object",
+									"properties": {
+										"f": {
+											"type": "string"
+										},
+										"m": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"flag": {
+							"type": "string"
+						},
+						"maps": {
+							"type": "object",
+							"properties": {
+								"googleMaps": {
+									"type": "string"
+								},
+								"openStreetMaps": {
+									"type": "string"
+								}
+							}
+						},
+						"population": {
+							"type": "integer"
+						},
+						"gini": {
+							"type": "object",
+							"properties": {
+								"2011": {
+									"type": "number"
+								}
+							}
+						},
+						"fifa": {
+							"type": "string"
+						},
+						"car": {
+							"type": "object",
+							"properties": {
+								"signs": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"side": {
+									"type": "string"
+								}
+							}
+						},
+						"timezones": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"continents": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"flags": {
+							"type": "object",
+							"properties": {
+								"png": {
+									"type": "string"
+								},
+								"svg": {
+									"type": "string"
+								},
+								"alt": {
+									"type": "string"
+								}
+							}
+						},
+						"coatOfArms": {
+							"type": "object",
+							"properties": {
+								"png": {
+									"type": "string"
+								},
+								"svg": {
+									"type": "string"
+								}
+							}
+						},
+						"startOfWeek": {
+							"type": "string"
+						},
+						"capitalInfo": {
+							"type": "object",
+							"properties": {
+								"latlng": {
+									"type": "array",
+									"items": {
+										"type": "number"
+									}
+								}
+							}
+						},
+						"postalCode": {
+							"type": "object",
+							"properties": {
+								"format": {
+									"type": "string"
+								},
+								"regex": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DS_JSON')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_JSON_TGT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_JSON",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "target"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "object",
+							"properties": {
+								"common": {
+									"type": "string"
+								},
+								"official": {
+									"type": "string"
+								},
+								"nativeName": {
+									"type": "object",
+									"properties": {
+										"eng": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"hin": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"tam": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"ukr": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"kor": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"ell": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"tur": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"sot": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"ssw": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"fra": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"mfe": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"nld": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"pap": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"tld": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"cca2": {
+							"type": "string"
+						},
+						"ccn3": {
+							"type": "string"
+						},
+						"cca3": {
+							"type": "string"
+						},
+						"cioc": {
+							"type": "string"
+						},
+						"independent": {
+							"type": "boolean"
+						},
+						"status": {
+							"type": "string"
+						},
+						"unMember": {
+							"type": "boolean"
+						},
+						"currencies": {
+							"type": "object",
+							"properties": {
+								"INR": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"USD": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"UAH": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"KPW": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"GBP": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"EUR": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"LSL": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"ZAR": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"SZL": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"MUR": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"idd": {
+							"type": "object",
+							"properties": {
+								"root": {
+									"type": "string"
+								},
+								"suffixes": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"capital": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"altSpellings": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"region": {
+							"type": "string"
+						},
+						"subregion": {
+							"type": "string"
+						},
+						"languages": {
+							"type": "object",
+							"properties": {
+								"eng": {
+									"type": "string"
+								},
+								"hin": {
+									"type": "string"
+								},
+								"tam": {
+									"type": "string"
+								},
+								"ukr": {
+									"type": "string"
+								},
+								"kor": {
+									"type": "string"
+								},
+								"ell": {
+									"type": "string"
+								},
+								"tur": {
+									"type": "string"
+								},
+								"sot": {
+									"type": "string"
+								},
+								"ssw": {
+									"type": "string"
+								},
+								"fra": {
+									"type": "string"
+								},
+								"mfe": {
+									"type": "string"
+								},
+								"nld": {
+									"type": "string"
+								},
+								"pap": {
+									"type": "string"
+								}
+							}
+						},
+						"translations": {
+							"type": "object",
+							"properties": {
+								"ara": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"bre": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"ces": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"cym": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"deu": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"est": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"fin": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"fra": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"hrv": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"hun": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"ita": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"jpn": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"kor": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"nld": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"per": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"pol": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"por": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"rus": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"slk": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"spa": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"srp": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"swe": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"tur": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"urd": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"zho": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"latlng": {
+							"type": "array",
+							"items": {
+								"type": "number"
+							}
+						},
+						"landlocked": {
+							"type": "boolean"
+						},
+						"borders": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"area": {
+							"type": "number"
+						},
+						"demonyms": {
+							"type": "object",
+							"properties": {
+								"eng": {
+									"type": "object",
+									"properties": {
+										"f": {
+											"type": "string"
+										},
+										"m": {
+											"type": "string"
+										}
+									}
+								},
+								"fra": {
+									"type": "object",
+									"properties": {
+										"f": {
+											"type": "string"
+										},
+										"m": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"flag": {
+							"type": "string"
+						},
+						"maps": {
+							"type": "object",
+							"properties": {
+								"googleMaps": {
+									"type": "string"
+								},
+								"openStreetMaps": {
+									"type": "string"
+								}
+							}
+						},
+						"population": {
+							"type": "integer"
+						},
+						"gini": {
+							"type": "object",
+							"properties": {
+								"2011": {
+									"type": "number"
+								},
+								"2016": {
+									"type": "number"
+								},
+								"2017": {
+									"type": "number"
+								},
+								"2018": {
+									"type": "number"
+								},
+								"2019": {
+									"type": "number"
+								}
+							}
+						},
+						"fifa": {
+							"type": "string"
+						},
+						"car": {
+							"type": "object",
+							"properties": {
+								"signs": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"side": {
+									"type": "string"
+								}
+							}
+						},
+						"timezones": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"continents": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"flags": {
+							"type": "object",
+							"properties": {
+								"png": {
+									"type": "string"
+								},
+								"svg": {
+									"type": "string"
+								},
+								"alt": {
+									"type": "string"
+								}
+							}
+						},
+						"coatOfArms": {
+							"type": "object",
+							"properties": {
+								"png": {
+									"type": "string"
+								},
+								"svg": {
+									"type": "string"
+								}
+							}
+						},
+						"startOfWeek": {
+							"type": "string"
+						},
+						"capitalInfo": {
+							"type": "object",
+							"properties": {
+								"latlng": {
+									"type": "array",
+									"items": {
+										"type": "number"
+									}
+								}
+							}
+						},
+						"postalCode": {
+							"type": "object",
+							"properties": {
+								"format": {
+									"type": "string"
+								},
+								"regex": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DS_JSON')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_PRODUCT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1423,6 +3402,114 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_RESTAPI')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_REST_API2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"item": {
+						"type": "string"
+					},
+					"filename": {
+						"type": "string"
+					},
+					"containername": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().item",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DS_REST_API2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_RESTAPI_COUNTRYNAME')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_REST_API2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"item": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().item",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DS_REST_API2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_REST_ALLCOUNTRIES')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestService1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestService1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_REST_API_ITEM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestService2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"item": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().item",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/RestService2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_TRIGGERS_CSV_TGT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1450,6 +3537,960 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Json1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_JSON",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(dataset().filename,'.json')",
+							"type": "Expression"
+						},
+						"folderPath": "API_FILES",
+						"fileSystem": "outputtgt"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DS_JSON')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResource1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_REST_API2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"item": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().item",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_REST_API2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_json4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_JSON",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					},
+					"containername": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().containername",
+							"type": "Expression"
+						},
+						"fileSystem": "outputtgt"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DS_JSON')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_json_api5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS_JSON",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(dataset().filename,'.json')",
+							"type": "Expression"
+						},
+						"fileSystem": "targetapi"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "object",
+							"properties": {
+								"common": {
+									"type": "string"
+								},
+								"official": {
+									"type": "string"
+								},
+								"nativeName": {
+									"type": "object",
+									"properties": {
+										"eng": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"hin": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"tam": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"ukr": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"kor": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"ell": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"tur": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"sot": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"ssw": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"fra": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"mfe": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"nld": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										},
+										"pap": {
+											"type": "object",
+											"properties": {
+												"official": {
+													"type": "string"
+												},
+												"common": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						"tld": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"cca2": {
+							"type": "string"
+						},
+						"ccn3": {
+							"type": "string"
+						},
+						"cca3": {
+							"type": "string"
+						},
+						"cioc": {
+							"type": "string"
+						},
+						"independent": {
+							"type": "boolean"
+						},
+						"status": {
+							"type": "string"
+						},
+						"unMember": {
+							"type": "boolean"
+						},
+						"currencies": {
+							"type": "object",
+							"properties": {
+								"INR": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"USD": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"UAH": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"KPW": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"GBP": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"EUR": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"LSL": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"ZAR": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"SZL": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								},
+								"MUR": {
+									"type": "object",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"symbol": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"idd": {
+							"type": "object",
+							"properties": {
+								"root": {
+									"type": "string"
+								},
+								"suffixes": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"capital": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"altSpellings": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"region": {
+							"type": "string"
+						},
+						"subregion": {
+							"type": "string"
+						},
+						"languages": {
+							"type": "object",
+							"properties": {
+								"eng": {
+									"type": "string"
+								},
+								"hin": {
+									"type": "string"
+								},
+								"tam": {
+									"type": "string"
+								},
+								"ukr": {
+									"type": "string"
+								},
+								"kor": {
+									"type": "string"
+								},
+								"ell": {
+									"type": "string"
+								},
+								"tur": {
+									"type": "string"
+								},
+								"sot": {
+									"type": "string"
+								},
+								"ssw": {
+									"type": "string"
+								},
+								"fra": {
+									"type": "string"
+								},
+								"mfe": {
+									"type": "string"
+								},
+								"nld": {
+									"type": "string"
+								},
+								"pap": {
+									"type": "string"
+								}
+							}
+						},
+						"translations": {
+							"type": "object",
+							"properties": {
+								"ara": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"bre": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"ces": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"cym": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"deu": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"est": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"fin": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"fra": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"hrv": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"hun": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"ita": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"jpn": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"kor": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"nld": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"per": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"pol": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"por": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"rus": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"slk": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"spa": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"srp": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"swe": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"tur": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"urd": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								},
+								"zho": {
+									"type": "object",
+									"properties": {
+										"official": {
+											"type": "string"
+										},
+										"common": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"latlng": {
+							"type": "array",
+							"items": {
+								"type": "number"
+							}
+						},
+						"landlocked": {
+							"type": "boolean"
+						},
+						"borders": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"area": {
+							"type": "number"
+						},
+						"demonyms": {
+							"type": "object",
+							"properties": {
+								"eng": {
+									"type": "object",
+									"properties": {
+										"f": {
+											"type": "string"
+										},
+										"m": {
+											"type": "string"
+										}
+									}
+								},
+								"fra": {
+									"type": "object",
+									"properties": {
+										"f": {
+											"type": "string"
+										},
+										"m": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"flag": {
+							"type": "string"
+						},
+						"maps": {
+							"type": "object",
+							"properties": {
+								"googleMaps": {
+									"type": "string"
+								},
+								"openStreetMaps": {
+									"type": "string"
+								}
+							}
+						},
+						"population": {
+							"type": "integer"
+						},
+						"gini": {
+							"type": "object",
+							"properties": {
+								"2011": {
+									"type": "number"
+								},
+								"2016": {
+									"type": "number"
+								},
+								"2017": {
+									"type": "number"
+								},
+								"2018": {
+									"type": "number"
+								},
+								"2019": {
+									"type": "number"
+								}
+							}
+						},
+						"fifa": {
+							"type": "string"
+						},
+						"car": {
+							"type": "object",
+							"properties": {
+								"signs": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"side": {
+									"type": "string"
+								}
+							}
+						},
+						"timezones": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"continents": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"flags": {
+							"type": "object",
+							"properties": {
+								"png": {
+									"type": "string"
+								},
+								"svg": {
+									"type": "string"
+								},
+								"alt": {
+									"type": "string"
+								}
+							}
+						},
+						"coatOfArms": {
+							"type": "object",
+							"properties": {
+								"png": {
+									"type": "string"
+								},
+								"svg": {
+									"type": "string"
+								}
+							}
+						},
+						"startOfWeek": {
+							"type": "string"
+						},
+						"capitalInfo": {
+							"type": "object",
+							"properties": {
+								"latlng": {
+									"type": "array",
+									"items": {
+										"type": "number"
+									}
+								}
+							}
+						},
+						"postalCode": {
+							"type": "object",
+							"properties": {
+								"format": {
+									"type": "string"
+								},
+								"regex": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DS_JSON')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_JSON')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1462,6 +4503,21 @@
 						"type": "SecureString",
 						"value": "[parameters('DS_JSON_accountKey')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_REST_API2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('DS_REST_API2_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
 				}
 			},
 			"dependsOn": []
@@ -1539,6 +4595,23 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/LS_API_PARQUET')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_API_PARQUET_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_API_PARQUET_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/LS_PARAM')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1551,6 +4624,21 @@
 						"type": "SecureString",
 						"value": "[parameters('LS_PARAM_accountKey')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_REST_API2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('LS_REST_API2_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
 				}
 			},
 			"dependsOn": []
@@ -1578,12 +4666,42 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/RestService1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('RestService1_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestService2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('RestService2_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TUMBLING_WINDOW2')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "PL_csv_EMP",
@@ -1609,12 +4727,101 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/storage_event-trigger3')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_QUESTION2_API",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/target/blobs/Files-API/india",
+					"blobPathEndsWith": ".json",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('storage_event-trigger3_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated",
+						"Microsoft.Storage.BlobDeleted"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_QUESTION2_API')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/storage_event_trigger2')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_API_QUESTION2_6",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"fname": "[parameters('storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_fname')]",
+							"cname": "[parameters('storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_cname')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/targetapi/blobs/india",
+					"blobPathEndsWith": ".json",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('storage_event_trigger2_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated",
+						"Microsoft.Storage.BlobDeleted"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_API_QUESTION2_6')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/storage_event_trigger3')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/outputtgt/blobs/API_FILES/india",
+					"blobPathEndsWith": ".json",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('storage_event_trigger3_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated",
+						"Microsoft.Storage.BlobDeleted"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/storage_event_trigger_dept')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -1642,6 +4849,27 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_STORAGE_TRIGGERS_PARAM')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger_API')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 15,
+						"startTime": "2024-11-26T00:00:00",
+						"endTime": "2024-11-26T12:00:00",
+						"timeZone": "US Mountain Standard Time"
+					}
+				}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/tumbling_window')]",

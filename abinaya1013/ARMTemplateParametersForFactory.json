@@ -17,6 +17,9 @@
 		"LS_ADLS_GENERIC_accountKey": {
 			"value": ""
 		},
+		"LS_API_PARQUET_accountKey": {
+			"value": ""
+		},
 		"LS_PARAM_accountKey": {
 			"value": ""
 		},
@@ -25,6 +28,9 @@
 		},
 		"DS_JSON_properties_typeProperties_url": {
 			"value": "https://azuretrassig.dfs.core.windows.net/"
+		},
+		"DS_REST_API2_properties_typeProperties_url": {
+			"value": "https://restcountries.com/v3.1/name"
 		},
 		"DS_SQL_GENERIC_properties_typeProperties_server": {
 			"value": "azuretrainingsqlserver2024.database.windows.net"
@@ -41,8 +47,14 @@
 		"LS_ADLS_GENERIC_properties_typeProperties_url": {
 			"value": "https://azuretrassig.dfs.core.windows.net/"
 		},
+		"LS_API_PARQUET_properties_typeProperties_url": {
+			"value": "https://azuretrassig.dfs.core.windows.net/"
+		},
 		"LS_PARAM_properties_typeProperties_url": {
 			"value": "https://azuretrassig.dfs.core.windows.net/"
+		},
+		"LS_REST_API2_properties_typeProperties_url": {
+			"value": "https://restcountries.com/v3.1/name"
 		},
 		"LS_SQL_properties_typeProperties_server": {
 			"value": "azuretrainingsqlserver2024.database.windows.net"
@@ -52,6 +64,27 @@
 		},
 		"LS_SQL_properties_typeProperties_userName": {
 			"value": "admin2024"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://restcountries.com/v3.1/all"
+		},
+		"RestService2_properties_typeProperties_url": {
+			"value": "https://restcountries.com/v3.1/name"
+		},
+		"storage_event-trigger3_properties_typeProperties_scope": {
+			"value": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
+		},
+		"storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_fname": {
+			"value": "@triggerBody().fileName"
+		},
+		"storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_cname": {
+			"value": "@triggerBody().filePath"
+		},
+		"storage_event_trigger2_properties_typeProperties_scope": {
+			"value": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
+		},
+		"storage_event_trigger3_properties_typeProperties_scope": {
+			"value": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
 		},
 		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname": {
 			"value": "@triggerBody().fileName"
