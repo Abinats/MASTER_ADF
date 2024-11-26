@@ -88,6 +88,9 @@
 				"type": "string"
 			}
 		},
+		"folder": {
+			"name": "ASSIGNMENT_6"
+		},
 		"annotations": []
 	}
 }

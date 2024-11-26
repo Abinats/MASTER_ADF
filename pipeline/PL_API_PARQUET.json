@@ -49,6 +49,14 @@
 				]
 			}
 		],
+		"variables": {
+			"items": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "ASSIGNMENT_6"
+		},
 		"annotations": []
 	}
 }
