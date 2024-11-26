@@ -51,7 +51,7 @@
 									"referenceName": "DS_RESTAPI_COUNTRYNAME",
 									"type": "DatasetReference",
 									"parameters": {
-										"item": "china"
+										"item": "honolulu"
 									}
 								}
 							],
@@ -60,7 +60,7 @@
 									"referenceName": "DS_JSON_API3",
 									"type": "DatasetReference",
 									"parameters": {
-										"filename": "honalulu"
+										"filename": "russia"
 									}
 								}
 							]
