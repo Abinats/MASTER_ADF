@@ -91,7 +91,7 @@
 					"method": "POST",
 					"url": "https://prod-09.centralus.logic.azure.com:443/workflows/460679c58d42469e9984f296d63adf7e/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=Gx--VKujVGb1SEUx8xjQtE-H1Yock8gk1g8q2HSYjlA",
 					"body": {
-						"value": "{\n    \"DataFactoryName\": \"abinaya1013\",\n    \"ErrorMessage\": \"@{activity('Copy data1').output.error.message}\",\n    \"Pipeline\": \"PL_API_QUESTION4\"\n}\n",
+						"value": "{\n\"PipelineName\":\"@{pipeline().pipeline}\",\n\"DataFactoryName\": \"@{pipeline().DataFactory}\",\n\"RunIDs\":\"@{pipeline().RunId}\",\n\"ErrorMessage\": \"@{activity('Copy data1').output.errors[0].Message}\",\n}\n",
 						"type": "Expression"
 					}
 				}
