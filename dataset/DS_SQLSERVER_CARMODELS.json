@@ -1,0 +1,34 @@
+{
+	"name": "DS_SQLSERVER_CARMODELS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_SERVER",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MODEL_NO",
+				"type": "varchar"
+			},
+			{
+				"name": "MODEL_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "MANUFACTURING_COUNTRY",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CarModels"
+		}
+	}
+}
