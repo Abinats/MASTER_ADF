@@ -26,6 +26,9 @@
 		"LS_SQL_password": {
 			"value": ""
 		},
+		"LS_SQL_SERVER_password": {
+			"value": ""
+		},
 		"DS_JSON_properties_typeProperties_url": {
 			"value": "https://azuretrassig.dfs.core.windows.net/"
 		},
@@ -64,6 +67,15 @@
 		},
 		"LS_SQL_properties_typeProperties_userName": {
 			"value": "admin2024"
+		},
+		"LS_SQL_SERVER_properties_typeProperties_server": {
+			"value": "DESKTOP-HRCOLHT\\SQLEXPRESS"
+		},
+		"LS_SQL_SERVER_properties_typeProperties_database": {
+			"value": "Test_Db"
+		},
+		"LS_SQL_SERVER_properties_typeProperties_userName": {
+			"value": "User13"
 		},
 		"RestService1_properties_typeProperties_url": {
 			"value": "https://restcountries.com/v3.1/all"

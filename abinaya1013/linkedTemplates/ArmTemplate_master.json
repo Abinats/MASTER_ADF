@@ -35,6 +35,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SQL'"
 		},
+		"LS_SQL_SERVER_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQL_SERVER'"
+		},
 		"DS_JSON_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://azuretrassig.dfs.core.windows.net/"
@@ -86,6 +90,18 @@
 		"LS_SQL_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "admin2024"
+		},
+		"LS_SQL_SERVER_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-HRCOLHT\\SQLEXPRESS"
+		},
+		"LS_SQL_SERVER_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Test_Db"
+		},
+		"LS_SQL_SERVER_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "User13"
 		},
 		"RestService1_properties_typeProperties_url": {
 			"type": "string",
@@ -260,6 +276,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"LS_SQL_SERVER_password": {
+						"value": "[parameters('LS_SQL_SERVER_password')]"
+					},
+					"LS_SQL_SERVER_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_SERVER_properties_typeProperties_server')]"
+					},
+					"LS_SQL_SERVER_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_SERVER_properties_typeProperties_database')]"
+					},
+					"LS_SQL_SERVER_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_SERVER_properties_typeProperties_userName')]"
 					}
 				}
 			},
