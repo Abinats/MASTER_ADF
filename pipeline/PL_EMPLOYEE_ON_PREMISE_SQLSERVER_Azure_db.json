@@ -1,5 +1,5 @@
 {
-	"name": "PL_EMPLOYEE_ON_PREMISE_SQLSERVER_ADLS_copy1",
+	"name": "PL_EMPLOYEE_ON_PREMISE_SQLSERVER_Azure_db",
 	"properties": {
 		"activities": [
 			{
