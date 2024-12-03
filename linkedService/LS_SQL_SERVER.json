@@ -1,0 +1,21 @@
+{
+	"name": "LS_SQL_SERVER",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "DESKTOP-HRCOLHT\\SQLEXPRESS",
+			"database": "Test_Db",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "User13",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4Y2NiZmVmOS1hM2VjLTRmNjMtODIyYS02NmZlMDk1ZTIyMWMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "MyselfhostedIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
