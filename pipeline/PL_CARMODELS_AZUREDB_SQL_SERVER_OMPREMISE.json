@@ -22,7 +22,7 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"preCopyScript": "truncate table ",
+						"preCopyScript": "truncate table CarModels",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
