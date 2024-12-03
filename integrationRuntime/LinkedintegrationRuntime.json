@@ -1,0 +1,6 @@
+{
+	"name": "LinkedintegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
