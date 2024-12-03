@@ -1,0 +1,34 @@
+{
+	"name": "DS_SQL_CAR_MODELS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MODEL_NO",
+				"type": "varchar"
+			},
+			{
+				"name": "MODEL_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "MANUFACTURING_COUNTRY",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "car_tgt"
+		}
+	}
+}
