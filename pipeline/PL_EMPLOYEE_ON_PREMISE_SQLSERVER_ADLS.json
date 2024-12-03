@@ -1,5 +1,5 @@
 {
-	"name": "PL_EMPLOYEE_ON_PREMISE_SQLSERVER",
+	"name": "PL_EMPLOYEE_ON_PREMISE_SQLSERVER_ADLS",
 	"properties": {
 		"activities": [
 			{
