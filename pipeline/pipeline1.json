@@ -29,13 +29,22 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "",
-					"value": ""
+					"variableName": "ouput_x",
+					"value": {
+						"value": "@variables('x')",
+						"type": "Expression"
+					}
 				}
 			}
 		],
 		"variables": {
 			"x": {
+				"type": "Array",
+				"defaultValue": [
+					"["
+				]
+			},
+			"ouput_x": {
 				"type": "Array"
 			}
 		},
