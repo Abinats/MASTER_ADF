@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "x",
-					"value": "100"
+					"value": "1000"
 				}
 			},
 			{
@@ -41,7 +41,9 @@
 			"x": {
 				"type": "Array",
 				"defaultValue": [
-					"["
+					100,
+					200,
+					300
 				]
 			},
 			"ouput_x": {
