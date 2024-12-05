@@ -70,8 +70,28 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "Listoffiles",
-								"value": ""
+								"value": {
+									"value": "@item().name",
+									"type": "Expression"
+								}
 							}
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Append variable1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": []
 						}
 					]
 				}
@@ -80,6 +100,9 @@
 		"variables": {
 			"Listoffiles": {
 				"type": "Array"
+			},
+			"stringlistoffiles": {
+				"type": "String"
 			}
 		},
 		"annotations": []
