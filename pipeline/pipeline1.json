@@ -94,7 +94,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "stringlistoffiles",
-								"value": ""
+								"value": {
+									"value": "@{variables('Listoffiles')}",
+									"type": "Expression"
+								}
 							}
 						}
 					]
