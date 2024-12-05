@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_APPEND_VARIABLES_EXAMPLE2",
 	"properties": {
 		"activities": [
 			{
