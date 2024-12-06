@@ -6,7 +6,10 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"start": {
+			"start_d": {
+				"type": "string"
+			},
+			"end_d": {
 				"type": "string"
 			}
 		},

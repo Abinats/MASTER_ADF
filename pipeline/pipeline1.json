@@ -25,7 +25,17 @@
 				"inputs": [
 					{
 						"referenceName": "DS_SQL_CUSTOMER_PIPELINE_PARAM",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"start_d": {
+								"value": "@pipeline().parameters.Startdate",
+								"type": "Expression"
+							},
+							"end_d": {
+								"value": "@pipeline().parameters.Enddate",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
