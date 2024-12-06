@@ -95,7 +95,7 @@
 									"referenceName": "DS_CUSTOMER_COUNT2",
 									"type": "DatasetReference",
 									"parameters": {
-										"Filename": "Customer_count>500"
+										"Filename": "Customer_count"
 									}
 								}
 							]
