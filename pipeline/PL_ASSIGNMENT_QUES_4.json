@@ -17,7 +17,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "",
+						"sqlReaderQuery": {
+							"value": "SELECT * \nFROM [SalesLT].[Customer]\n where ModifiedDate >= '@{pipeline().parameters.Startdate}'\n and ModifiedDate <='@{pipeline().parameters.Enddate}'",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
