@@ -64,10 +64,7 @@
 				"outputs": [
 					{
 						"referenceName": "DS_ADLS_CUSTOMER_PIPELINE_PARAM",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": "customer_date_range"
-						}
+						"type": "DatasetReference"
 					}
 				]
 			}
