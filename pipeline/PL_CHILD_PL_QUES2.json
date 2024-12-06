@@ -15,10 +15,6 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"expression": {
-						"value": "@greater(activity('Lookup1').output.firstRow.PRODUCTCOUNT,600)",
-						"type": "Expression"
-					},
 					"ifTrueActivities": [
 						{
 							"name": "Copy data1",
@@ -93,7 +89,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT COUNT(*) AS PRODUCTCOUNT FROM SALESLT.[Product]",
+						"sqlReaderQuery": "SELECT COUNT(*) AS CUSTOMERCOUNT FROM SALESLT.CUSTOMER",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
