@@ -1,0 +1,14 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"parameters": {
+			"Startdate": {
+				"type": "string"
+			},
+			"Enddate": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
