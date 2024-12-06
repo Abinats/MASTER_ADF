@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"highwater": {
+			"highwatermark": {
 				"type": "string"
 			}
 		},

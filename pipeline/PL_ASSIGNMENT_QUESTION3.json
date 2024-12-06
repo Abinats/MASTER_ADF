@@ -100,7 +100,13 @@
 				"inputs": [
 					{
 						"referenceName": "DS_SQL_CUSTOMERADDRESS2",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"highwatermark": {
+								"value": "@pipeline().parameters.Highwatermarkdate",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
