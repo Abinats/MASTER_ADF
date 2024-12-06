@@ -5,6 +5,11 @@
 			"referenceName": "LS_SQL",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"highwater": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
