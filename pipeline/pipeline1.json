@@ -73,7 +73,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT * FROM ",
+						"sqlReaderQuery": "",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -91,7 +91,7 @@
 			"Lastmodified": {
 				"type": "string"
 			},
-			"Hoghwatermarkdate": {
+			"Highwatermarkdate": {
 				"type": "string"
 			}
 		},
