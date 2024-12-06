@@ -15,6 +15,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "@greater(activity('Lookup1').output.firstRow.CUSTOMERCOUNT,600 )",
+						"type": "Expression"
+					},
 					"ifTrueActivities": [
 						{
 							"name": "Copy data1",
