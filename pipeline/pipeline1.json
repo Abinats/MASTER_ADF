@@ -17,6 +17,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select * from @pipeline().parameters.Tablename",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -25,7 +29,13 @@
 				"inputs": [
 					{
 						"referenceName": "DS_SQL_DYNAMIC_TABLE_FOLDER",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": {
+								"value": "@pipeline().parameters.Tablename",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
