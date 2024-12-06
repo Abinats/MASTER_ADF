@@ -64,7 +64,13 @@
 				"outputs": [
 					{
 						"referenceName": "DS_ADLS_CUSTOMER_PIPELINE_PARAM",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@concat('customer_daterange',utcNow(),'.csv')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
