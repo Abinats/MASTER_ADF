@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_ASSIGNMENT_7_PARENT_PL",
 	"properties": {
 		"activities": [
 			{
@@ -93,7 +93,10 @@
 							"outputs": [
 								{
 									"referenceName": "DS_CUSTOMER_COUNT2",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"Filename": "Customer_count>500"
+									}
 								}
 							]
 						}
