@@ -1,6 +1,14 @@
 {
 	"name": "pipeline1",
 	"properties": {
+		"parameters": {
+			"Lastmodified": {
+				"type": "string"
+			},
+			"Hoghwatermarkdate": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
