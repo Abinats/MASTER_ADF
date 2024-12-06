@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_CHILD_PL_QUES2",
 	"properties": {
 		"activities": [
 			{
@@ -39,9 +39,15 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "AzureSqlSink",
-									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": false
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
 								},
 								"enableStaging": false,
 								"translator": {
@@ -61,8 +67,11 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "DS_PRODUCT_COUNT3",
-									"type": "DatasetReference"
+									"referenceName": "DS_PRODUCT_COUNT_CSV",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": "product_count"
+									}
 								}
 							]
 						}
