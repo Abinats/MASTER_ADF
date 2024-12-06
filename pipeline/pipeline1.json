@@ -74,7 +74,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT * FROM [SalesLT].[CustomerAddress] \nWHERE ModifiedDate >@ variables('Highwatermarkdate')",
+							"value": "SELECT * FROM [SalesLT].[CustomerAddress] \nWHERE ModifiedDate > @{variables('Highwatermarkdate')}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
