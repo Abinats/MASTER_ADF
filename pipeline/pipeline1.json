@@ -61,6 +61,10 @@
 							"filename": {
 								"value": "@concat('target/',pipeline().parameters.Foldername,'/')",
 								"type": "Expression"
+							},
+							"folderpath": {
+								"value": "@concat('target/',pipeline().parameters.Foldername,'/',pipeline().parameters.Tablename,'_',utcNow(),'.csv')",
+								"type": "Expression"
 							}
 						}
 					}
