@@ -120,7 +120,13 @@
 									"referenceName": "PL_CHILD_PL_QUES2",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true
+								"waitOnCompletion": true,
+								"parameters": {
+									"customercount": {
+										"value": "@pipeline().parameters.customercount",
+										"type": "Expression"
+									}
+								}
 							}
 						}
 					]
