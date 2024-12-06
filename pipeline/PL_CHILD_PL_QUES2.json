@@ -109,6 +109,9 @@
 				"type": "string"
 			}
 		},
+		"folder": {
+			"name": "ASSIGNMENT_7"
+		},
 		"annotations": []
 	}
 }

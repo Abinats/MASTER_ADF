@@ -99,6 +99,29 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "PL_CHILD_PL_QUES2",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
 						}
 					]
 				}
@@ -108,6 +131,9 @@
 			"customercount": {
 				"type": "string"
 			}
+		},
+		"folder": {
+			"name": "ASSIGNMENT_7"
 		},
 		"annotations": []
 	}
