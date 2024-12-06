@@ -49,6 +49,10 @@
 							"tablename": {
 								"value": "@pipeline().parameters.Tablename",
 								"type": "Expression"
+							},
+							"schemaname": {
+								"value": "@pipeline().parameters.Schemaname",
+								"type": "Expression"
 							}
 						}
 					}
@@ -76,6 +80,9 @@
 				"type": "string"
 			},
 			"Foldername": {
+				"type": "string"
+			},
+			"Schemaname": {
 				"type": "string"
 			}
 		},
