@@ -50,7 +50,13 @@
 				"outputs": [
 					{
 						"referenceName": "DS_ADLS_PRODUCT",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@concat('product_data',utcNow(),'.csv')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
