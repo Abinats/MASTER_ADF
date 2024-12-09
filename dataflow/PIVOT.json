@@ -31,7 +31,8 @@
 				"     pivotBy(product_name),",
 				"     {} = count(customer_id),",
 				"     columnNaming: '$N$V',",
-				"     lateral: true) ~> pivot1"
+				"     lateral: true,",
+				"     partitionBy('hash', 1)) ~> pivot1"
 			]
 		}
 	}
