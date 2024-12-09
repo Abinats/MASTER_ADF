@@ -16,9 +16,6 @@
 			"transformations": [
 				{
 					"name": "pivot1"
-				},
-				{
-					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -30,13 +27,12 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"derivedColumn1 pivot(groupBy(customer_id),",
+				"source1 pivot(groupBy(customer_id),",
 				"     pivotBy(product_name),",
 				"     {} = product_name,",
 				"     columnNaming: '$N$V',",
 				"     lateral: true,",
-				"     partitionBy('hash', 1)) ~> pivot1",
-				"source1 derive(product_name = iif(product_name=='mobile', 'Mobile_Sales', iif(product_name=='refrigerator', 'Refrigerator_Sales', 'Washing_Sales'))) ~> derivedColumn1"
+				"     partitionBy('hash', 1)) ~> pivot1"
 			]
 		}
 	}
