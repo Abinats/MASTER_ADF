@@ -16,9 +16,6 @@
 			"transformations": [
 				{
 					"name": "pivot1"
-				},
-				{
-					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -30,15 +27,12 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"aggregate1 pivot(groupBy(customer_id = aggregate1@customer_id),",
+				"source1 pivot(groupBy(customer_id = aggregate1@customer_id),",
 				"     pivotBy(product_name),",
 				"     {} = product_name,",
 				"     columnNaming: '$N$V',",
 				"     lateral: true,",
-				"     partitionBy('hash', 1)) ~> pivot1",
-				"source1 aggregate(groupBy(product_name,",
-				"          customer_id),",
-				"     sales = columnNames(sales)) ~> aggregate1"
+				"     partitionBy('hash', 1)) ~> pivot1"
 			]
 		}
 	}
