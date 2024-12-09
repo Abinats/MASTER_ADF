@@ -29,8 +29,8 @@
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 pivot(groupBy(customer_id),",
 				"     pivotBy(product_name, ['mobile', 'refrigetator', 'washing']),",
-				"     {} = max(sales),",
-				"          {} = count(customer_id),",
+				"     sales = max(sales),",
+				"          count_customer_id = count(customer_id),",
 				"     columnNaming: '$N$V',",
 				"     lateral: true,",
 				"     partitionBy('hash', 1)) ~> pivot1"
