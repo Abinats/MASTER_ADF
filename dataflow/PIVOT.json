@@ -36,8 +36,9 @@
 				"     columnNaming: '$N$V',",
 				"     lateral: true,",
 				"     partitionBy('hash', 1)) ~> pivot1",
-				"source1 aggregate(groupBy(product_name),",
-				"     customer_id = count(customer_id)) ~> aggregate1"
+				"source1 aggregate(groupBy(product_name,",
+				"          customer_id),",
+				"     sales = ERROR_FUNCTION('')) ~> aggregate1"
 			]
 		}
 	}
