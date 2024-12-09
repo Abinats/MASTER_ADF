@@ -38,7 +38,7 @@
 				"     partitionBy('hash', 1)) ~> pivot1",
 				"source1 aggregate(groupBy(customer_id,",
 				"          product_name),",
-				"     sales = byOrigin(product_name)) ~> aggregate1"
+				"     sales = collect(sales)) ~> aggregate1"
 			]
 		}
 	}
