@@ -28,7 +28,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 pivot(groupBy(customer_id),",
-				"     pivotBy(product_name),",
+				"     pivotBy(sales),",
 				"     {} = product_name,",
 				"     columnNaming: '$N$V',",
 				"     lateral: true,",
