@@ -12,7 +12,11 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "pivot1"
@@ -32,7 +36,11 @@
 				"     pname_ = max(sales),",
 				"     columnNaming: '$N$V',",
 				"     lateral: true,",
-				"     partitionBy('hash', 1)) ~> pivot1"
+				"     partitionBy('hash', 1)) ~> pivot1",
+				"pivot1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
