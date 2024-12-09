@@ -27,9 +27,6 @@
 				}
 			],
 			"scriptLines": [
-				"parameters{",
-				"     filename as string",
-				"}",
 				"source(output(",
 				"          customer_id as string,",
 				"          product_name as string,",
