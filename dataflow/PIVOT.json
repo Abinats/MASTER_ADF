@@ -30,15 +30,14 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"aggregate1 pivot(groupBy(aggregate1@customer_id),",
+				"aggregate1 pivot(groupBy(customer_id = aggregate1@customer_id),",
 				"     pivotBy(product_name),",
 				"     {} = product_name,",
 				"     columnNaming: '$N$V',",
 				"     lateral: true,",
 				"     partitionBy('hash', 1)) ~> pivot1",
-				"source1 aggregate(groupBy(customer_id,",
-				"          product_name),",
-				"     customer_id = collect(sales)) ~> aggregate1"
+				"source1 aggregate(groupBy(product_name),",
+				"     customer_id = count(customer_id)) ~> aggregate1"
 			]
 		}
 	}
