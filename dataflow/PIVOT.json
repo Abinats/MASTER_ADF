@@ -16,6 +16,10 @@
 			"transformations": [
 				{
 					"name": "pivot1"
+				},
+				{
+					"name": "MapDrifted1",
+					"description": "Creates an explicit mapping for each drifted column"
 				}
 			],
 			"scriptLines": [
@@ -32,7 +36,10 @@
 				"     {} = count(customer_id),",
 				"     columnNaming: '$N$V',",
 				"     lateral: true,",
-				"     partitionBy('hash', 1)) ~> pivot1"
+				"     partitionBy('hash', 1)) ~> pivot1",
+				"pivot1 derive(salesmobile = toLong(byName('salesmobile')),",
+				"          salesrefrigerator = toLong(byName('salesrefrigerator')),",
+				"          saleswashing = toLong(byName('saleswashing'))) ~> MapDrifted1"
 			]
 		}
 	}
