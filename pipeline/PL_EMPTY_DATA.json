@@ -185,7 +185,7 @@
 										],
 										"outputs": [
 											{
-												"referenceName": "DS_aDLS_E_DATA_TARGET4",
+												"referenceName": "DS_ADLS_EMPTY_FILES_TARGET",
 												"type": "DatasetReference"
 											}
 										]
