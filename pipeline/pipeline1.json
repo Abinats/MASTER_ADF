@@ -20,7 +20,7 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"size"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
@@ -82,7 +82,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get Metadata1').output.childitems",
+						"value": "@activity('Get Metadata1').output.childItems",
 						"type": "Expression"
 					}
 				}
