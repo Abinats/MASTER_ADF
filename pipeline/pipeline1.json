@@ -77,9 +77,14 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "DS_ADLS_EMPTY",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"fname": "e_data"
+						}
 					},
-					"fieldList": [],
+					"fieldList": [
+						"size"
+					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"enablePartitionDiscovery": false
