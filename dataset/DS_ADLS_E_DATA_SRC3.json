@@ -19,8 +19,7 @@
 					"value": "@dataset().Fname",
 					"type": "Expression"
 				},
-				"folderPath": "CSV",
-				"fileSystem": "landing"
+				"fileSystem": "src"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
