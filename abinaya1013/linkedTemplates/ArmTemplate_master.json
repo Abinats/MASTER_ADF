@@ -296,18 +296,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"LS_SQL_SERVER_password": {
-						"value": "[parameters('LS_SQL_SERVER_password')]"
-					},
-					"LS_SQL_SERVER_properties_typeProperties_server": {
-						"value": "[parameters('LS_SQL_SERVER_properties_typeProperties_server')]"
-					},
-					"LS_SQL_SERVER_properties_typeProperties_database": {
-						"value": "[parameters('LS_SQL_SERVER_properties_typeProperties_database')]"
-					},
-					"LS_SQL_SERVER_properties_typeProperties_userName": {
-						"value": "[parameters('LS_SQL_SERVER_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -328,6 +316,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"LS_SQL_SERVER_password": {
+						"value": "[parameters('LS_SQL_SERVER_password')]"
+					},
+					"LS_SQL_SERVER_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_SERVER_properties_typeProperties_server')]"
+					},
+					"LS_SQL_SERVER_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_SERVER_properties_typeProperties_database')]"
+					},
+					"LS_SQL_SERVER_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_SERVER_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -343,6 +343,26 @@
 				"mode": "incremental",
 				"templateLink": {
 					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'abinaya1013_ArmTemplate_4')]"
+			]
+		},
+		{
+			"name": "abinaya1013_ArmTemplate_6",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_6.json', parameters('containerSasToken'))]",
 					"contentVersion": "1.0.0.0"
 				},
 				"parameters": {
@@ -373,7 +393,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'abinaya1013_ArmTemplate_4')]"
+				"[resourceId('Microsoft.Resources/deployments', 'abinaya1013_ArmTemplate_5')]"
 			]
 		}
 	]
