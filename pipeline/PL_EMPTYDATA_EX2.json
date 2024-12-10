@@ -201,6 +201,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "PRACTICAL_ONLIVE"
+		},
 		"annotations": []
 	}
 }
