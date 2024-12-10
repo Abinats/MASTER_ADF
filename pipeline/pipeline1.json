@@ -72,7 +72,10 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "DS_ADLS_EMPTY",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"fname": "empty_file"
+						}
 					},
 					"fieldList": [],
 					"storeSettings": {
