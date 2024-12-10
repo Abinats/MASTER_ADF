@@ -71,7 +71,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_ADLS_E_DATA_SOURCE",
+						"referenceName": "DS_ADLS_EMPTY",
 						"type": "DatasetReference"
 					},
 					"fieldList": [],
