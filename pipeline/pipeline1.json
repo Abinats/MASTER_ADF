@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_ADLS_CUSTOMERADDRESS",
+						"referenceName": "DS_ADLS_E_DATA",
 						"type": "DatasetReference"
 					},
 					"fieldList": [],
