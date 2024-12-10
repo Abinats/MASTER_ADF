@@ -1,5 +1,5 @@
 {
-	"name": "pl_e_data",
+	"name": "PL_EMPTY_DATA",
 	"properties": {
 		"activities": [
 			{
@@ -19,7 +19,9 @@
 						"referenceName": "DS_ADLS_E_DATA",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"enablePartitionDiscovery": false
@@ -30,11 +32,11 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "ForEach2",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Filter1",
+						"activity": "Get Metadata1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -48,18 +50,84 @@
 					},
 					"activities": [
 						{
-							"name": "If Condition2",
-							"type": "IfCondition",
+							"name": "Get Metadata2",
+							"type": "GetMetadata",
+							"dependsOn": [
+								{
+									"activity": "Set variable1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "DS_ADLS_E_DATA_SRC3",
+									"type": "DatasetReference",
+									"parameters": {
+										"Fname": {
+											"value": "@variables('filename')",
+											"type": "Expression"
+										}
+									}
+								},
+								"fieldList": [
+									"size"
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
+						},
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
 							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "filename",
+								"value": {
+									"value": "@item().name",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Get Metadata2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@greater(item().size, 0)",
+									"value": "@greater(activity('Get Metadata2').output.size,0 )",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
 									{
-										"name": "Copy data2",
+										"name": "Copy data1",
 										"type": "Copy",
 										"dependsOn": [],
 										"policy": {
@@ -76,6 +144,7 @@
 												"storeSettings": {
 													"type": "AzureBlobFSReadSettings",
 													"recursive": true,
+													"wildcardFileName": "*.csv",
 													"enablePartitionDiscovery": false
 												},
 												"formatSettings": {
@@ -105,13 +174,13 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "DS_ADLS_E_DATA_SRC",
+												"referenceName": "DS_ADLS_E_DATA4",
 												"type": "DatasetReference"
 											}
 										],
 										"outputs": [
 											{
-												"referenceName": "DS_aDLS_E_DATA_TGT",
+												"referenceName": "DS_aDLS_E_DATA_TARGET4",
 												"type": "DatasetReference"
 											}
 										]
@@ -121,31 +190,13 @@
 						}
 					]
 				}
-			},
-			{
-				"name": "Filter1",
-				"type": "Filter",
-				"dependsOn": [
-					{
-						"activity": "Get Metadata1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@activity('Get Metadata1').output.childItems",
-						"type": "Expression"
-					},
-					"condition": {
-						"value": "@endswith(item().name,'.csv' )",
-						"type": "Expression"
-					}
-				}
 			}
 		],
+		"variables": {
+			"filename": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
