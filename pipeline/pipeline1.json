@@ -123,7 +123,22 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"enableLogging": true
+											"dataset": {
+												"referenceName": "DS_ADLS_INPUT2",
+												"type": "DatasetReference",
+												"parameters": {
+													"filename": {
+														"value": "@variables('lastmodifiedtime')",
+														"type": "Expression"
+													}
+												}
+											},
+											"enableLogging": true,
+											"storeSettings": {
+												"type": "AzureBlobFSReadSettings",
+												"recursive": true,
+												"enablePartitionDiscovery": false
+											}
 										}
 									}
 								]
