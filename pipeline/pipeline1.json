@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_ADLS_INPUT",
+						"referenceName": "DS_ADLS_INPUTFILES",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -50,11 +50,23 @@
 					},
 					"activities": [
 						{
-							"name": "Get Metadata2",
-							"type": "GetMetadata",
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@lessOrEquals(item().lastModified,addHours(utcNow(),-1 ) )",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Delete1",
+							"type": "Delete",
 							"dependsOn": [
 								{
-									"activity": "Set variable1",
+									"activity": "If Condition1",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -70,101 +82,29 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "DS_ADLS_INPUT2",
+									"referenceName": "Binary1",
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@variables('filename')",
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
 								},
-								"fieldList": [
-									"lastModified",
-									"itemName"
-								],
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "LS_ADLS_LOG",
+										"type": "LinkedServiceReference"
+									},
+									"path": "logfiles2"
+								},
+								"enableLogging": true,
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"modifiedDatetimeStart": "2024-12-11T11:30:00.000Z",
+									"modifiedDatetimeEnd": "2024-12-11T12:00:00.000Z",
 									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							}
-						},
-						{
-							"name": "If Condition1",
-							"type": "IfCondition",
-							"dependsOn": [
-								{
-									"activity": "Get Metadata2",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"userProperties": [],
-							"typeProperties": {
-								"expression": {
-									"value": "@lessOrEquals(activity('Get Metadata2').output.lastModified,variables('lastmodifiedtime') )",
-									"type": "Expression"
-								},
-								"ifTrueActivities": [
-									{
-										"name": "Delete1",
-										"type": "Delete",
-										"dependsOn": [],
-										"policy": {
-											"timeout": "0.12:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"dataset": {
-												"referenceName": "DS_ADLS_INPUT2",
-												"type": "DatasetReference",
-												"parameters": {
-													"filename": {
-														"value": "@variables('lastmodifiedtime')",
-														"type": "Expression"
-													}
-												}
-											},
-											"logStorageSettings": {
-												"linkedServiceName": {
-													"referenceName": "LS_ADLS_LOG",
-													"type": "LinkedServiceReference"
-												},
-												"path": "logfiles"
-											},
-											"enableLogging": true,
-											"storeSettings": {
-												"type": "AzureBlobFSReadSettings",
-												"recursive": true,
-												"enablePartitionDiscovery": false
-											}
-										}
-									}
-								]
-							}
-						},
-						{
-							"name": "Set variable1",
-							"type": "SetVariable",
-							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "filename",
-								"value": {
-									"value": "@item().name",
-									"type": "Expression"
 								}
 							}
 						}
@@ -173,12 +113,6 @@
 			}
 		],
 		"variables": {
-			"lastmodifiedtime": {
-				"type": "String"
-			},
-			"latestfile": {
-				"type": "String"
-			},
 			"filename": {
 				"type": "String"
 			}
