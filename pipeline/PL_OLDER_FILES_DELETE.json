@@ -111,40 +111,43 @@
 								},
 								"ifTrueActivities": [
 									{
-										"name": "Delete1",
-										"type": "Delete",
+										"name": "Set variable2",
+										"type": "SetVariable",
 										"dependsOn": [],
 										"policy": {
-											"timeout": "0.12:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
 											"secureOutput": false,
 											"secureInput": false
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"dataset": {
-												"referenceName": "DS_ADLS_INPUT2",
-												"type": "DatasetReference",
-												"parameters": {
-													"filename": {
-														"value": "@variables('lastmodifiedtime')",
-														"type": "Expression"
-													}
-												}
-											},
-											"logStorageSettings": {
-												"linkedServiceName": {
-													"referenceName": "LS_ADLS_LOG",
-													"type": "LinkedServiceReference"
-												},
-												"path": "logfiles"
-											},
-											"enableLogging": true,
-											"storeSettings": {
-												"type": "AzureBlobFSReadSettings",
-												"recursive": true,
-												"enablePartitionDiscovery": false
+											"variableName": "latestfile",
+											"value": {
+												"value": "@activity('Get Metadata2').output.itemName",
+												"type": "Expression"
+											}
+										}
+									},
+									{
+										"name": "Set variable3",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Set variable2",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "lastmodifiedtime",
+											"value": {
+												"value": "@activity('Get Metadata2').output.lastModified",
+												"type": "Expression"
 											}
 										}
 									}
@@ -169,6 +172,51 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "Delete1_copy1",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "ForEach1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_ADLS_INPUT2",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('lastmodifiedtime')",
+								"type": "Expression"
+							}
+						}
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "LS_ADLS_LOG",
+							"type": "LinkedServiceReference"
+						},
+						"path": "logfiles"
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
 				}
 			}
 		],
