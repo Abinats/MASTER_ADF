@@ -60,14 +60,34 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "DS_ADLS_INPUT",
+									"type": "DatasetReference"
+								},
+								"fieldList": [
+									"lastModified",
+									"itemName"
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
 						}
 					]
 				}
 			}
 		],
 		"variables": {
-			"last": {
+			"lastmodifiedtime": {
+				"type": "String"
+			},
+			"latestfile": {
 				"type": "String"
 			}
 		},
