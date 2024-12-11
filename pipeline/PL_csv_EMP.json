@@ -38,7 +38,23 @@
 						}
 					},
 					"enableStaging": false,
+					"parallelCopies": 1,
 					"enableSkipIncompatibleRow": true,
+					"validateDataConsistency": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "LS_ADLS",
+								"type": "LinkedServiceReference"
+							}
+						}
+					},
+					"dataIntegrationUnits": 4,
 					"translator": {
 						"type": "TabularTranslator",
 						"typeConversion": true,
