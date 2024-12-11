@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_DELETE_OLDER_FILES_EX1",
 	"properties": {
 		"activities": [
 			{
