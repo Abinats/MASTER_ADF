@@ -52,7 +52,14 @@
 						{
 							"name": "Get Metadata2",
 							"type": "GetMetadata",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Set variable1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -124,7 +131,11 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "filename",
+								"value": ""
+							}
 						}
 					]
 				}
@@ -135,6 +146,9 @@
 				"type": "String"
 			},
 			"latestfile": {
+				"type": "String"
+			},
+			"filename": {
 				"type": "String"
 			}
 		},
