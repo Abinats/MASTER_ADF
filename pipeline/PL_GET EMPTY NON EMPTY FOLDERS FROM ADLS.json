@@ -59,6 +59,25 @@
 									"value": "@empty(activity('Get Metadata1').output.childItems)",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "Set variable2",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "nonempty",
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "Set variable1",
@@ -71,7 +90,10 @@
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "empty",
-											"value": ""
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
 										}
 									}
 								]
