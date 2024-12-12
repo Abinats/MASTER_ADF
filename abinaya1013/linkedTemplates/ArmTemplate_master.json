@@ -375,6 +375,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'abinaya1013_ArmTemplate_5')]"
+			]
+		},
+		{
+			"name": "abinaya1013_ArmTemplate_7",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"storage_event-trigger3_properties_typeProperties_scope": {
 						"value": "[parameters('storage_event-trigger3_properties_typeProperties_scope')]"
@@ -396,26 +416,6 @@
 					},
 					"storage_event_trigger_dept_properties_typeProperties_scope": {
 						"value": "[parameters('storage_event_trigger_dept_properties_typeProperties_scope')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'abinaya1013_ArmTemplate_5')]"
-			]
-		},
-		{
-			"name": "abinaya1013_ArmTemplate_7",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2024-03-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
 					}
 				}
 			},
