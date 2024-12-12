@@ -113,7 +113,10 @@
 										],
 										"typeProperties": {
 											"variableName": "emptyfolder",
-											"value": ""
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
 										}
 									}
 								]
