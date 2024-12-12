@@ -100,7 +100,15 @@
 								"expression": {
 									"value": "@empty(activity('Get Metadata2').output.childItems)",
 									"type": "Expression"
-								}
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Append variable1",
+										"type": "AppendVariable",
+										"dependsOn": [],
+										"userProperties": []
+									}
+								]
 							}
 						}
 					]
