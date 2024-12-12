@@ -81,21 +81,6 @@
 											}
 										}
 									}
-								],
-								"ifTrueActivities": [
-									{
-										"name": "Append variable1",
-										"type": "AppendVariable",
-										"dependsOn": [],
-										"userProperties": [],
-										"typeProperties": {
-											"variableName": "empty",
-											"value": {
-												"value": "@item().name",
-												"type": "Expression"
-											}
-										}
-									}
 								]
 							}
 						},
