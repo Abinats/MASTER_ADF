@@ -24,6 +24,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -77,6 +78,7 @@
 								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
@@ -101,12 +103,34 @@
 									"value": "@empty(activity('Get Metadata2').output.childItems)",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "Append variable2",
+										"type": "AppendVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "nonempty",
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "Append variable1",
 										"type": "AppendVariable",
 										"dependsOn": [],
-										"userProperties": []
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "empty",
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
+										}
 									}
 								]
 							}
@@ -198,10 +222,10 @@
 		],
 		"variables": {
 			"empty": {
-				"type": "String"
+				"type": "Array"
 			},
 			"nonempty": {
-				"type": "String"
+				"type": "Array"
 			}
 		},
 		"annotations": []
