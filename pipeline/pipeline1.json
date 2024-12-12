@@ -72,7 +72,9 @@
 										}
 									}
 								},
-								"fieldList": [],
+								"fieldList": [
+									"childItems"
+								],
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"enablePartitionDiscovery": false
@@ -81,6 +83,19 @@
 									"type": "DelimitedTextReadSettings"
 								}
 							}
+						},
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Get Metadata2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": []
 						}
 					]
 				}
