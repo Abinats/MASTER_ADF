@@ -164,14 +164,14 @@
 							{
 								"name": "EmptyFolder",
 								"value": {
-									"value": "@variables('empty')",
+									"value": "@{variables('empty')}",
 									"type": "Expression"
 								}
 							},
 							{
 								"name": "NonEmptyFolder",
 								"value": {
-									"value": "@variables('nonempty')",
+									"value": "@{variables('nonempty')}",
 									"type": "Expression"
 								}
 							}
