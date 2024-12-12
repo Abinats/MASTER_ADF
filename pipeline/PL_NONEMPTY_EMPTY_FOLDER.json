@@ -108,7 +108,7 @@
 										"dependsOn": [],
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "nonemptyfolder",
+											"variableName": "nonempty",
 											"value": {
 												"value": "@item().name",
 												"type": "Expression"
@@ -127,7 +127,7 @@
 											}
 										],
 										"typeProperties": {
-											"variableName": "emptyfolder",
+											"variableName": "empty",
 											"value": {
 												"value": "@item().name",
 												"type": "Expression"
@@ -142,11 +142,11 @@
 			}
 		],
 		"variables": {
-			"Emptyfolder": {
-				"type": "String"
+			"empty": {
+				"type": "Array"
 			},
-			"Nonemptyfolder": {
-				"type": "String"
+			"nonempty": {
+				"type": "Array"
 			}
 		},
 		"annotations": []
