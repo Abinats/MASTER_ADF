@@ -80,7 +80,7 @@
 										"typeProperties": {
 											"variableName": "nonempty",
 											"value": {
-												"value": "@createArray(activity('Get Metadata2').output.name)",
+												"value": "@item().name",
 												"type": "Expression"
 											}
 										}
@@ -99,7 +99,7 @@
 										"typeProperties": {
 											"variableName": "empty",
 											"value": {
-												"value": "@createArray(activity('Get Metadata2').output.name)",
+												"value": "@item().name",
 												"type": "Expression"
 											}
 										}
