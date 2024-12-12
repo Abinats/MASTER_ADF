@@ -170,7 +170,10 @@
 							},
 							{
 								"name": "NonEmptyFolder",
-								"value": "$$FILEPATH"
+								"value": {
+									"value": "@variables('nonempty')",
+									"type": "Expression"
+								}
 							}
 						],
 						"storeSettings": {
