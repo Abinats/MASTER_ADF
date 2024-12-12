@@ -125,7 +125,7 @@
 										"dependsOn": [],
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "empty",
+											"variableName": "emptyfolder",
 											"value": {
 												"value": "@item().name",
 												"type": "Expression"
@@ -241,10 +241,10 @@
 			}
 		],
 		"variables": {
-			"empty": {
+			"emptyfolder": {
 				"type": "Array"
 			},
-			"nonempty": {
+			"nonemptyfolder": {
 				"type": "Array"
 			}
 		},
