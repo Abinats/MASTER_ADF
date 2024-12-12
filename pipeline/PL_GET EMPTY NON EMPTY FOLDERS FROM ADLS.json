@@ -53,7 +53,13 @@
 							"name": "If Condition1",
 							"type": "IfCondition",
 							"dependsOn": [],
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@empty(activity('Get Metadata1').output.childItems)",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
