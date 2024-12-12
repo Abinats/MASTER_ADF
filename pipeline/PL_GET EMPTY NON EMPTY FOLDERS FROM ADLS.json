@@ -98,10 +98,9 @@
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "empty",
-											"value": {
-												"value": "@concat(variables('empty'),createArray(activity('Get Metadata2').output.itemName))",
-												"type": "Expression"
-											}
+											"value": [
+												""
+											]
 										}
 									}
 								]
