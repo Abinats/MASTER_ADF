@@ -120,7 +120,14 @@
 									{
 										"name": "Append variable3",
 										"type": "AppendVariable",
-										"dependsOn": [],
+										"dependsOn": [
+											{
+												"activity": "Set variable1",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
 										"userProperties": []
 									},
 									{
@@ -133,8 +140,11 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "empty",
-											"value": ""
+											"variableName": "",
+											"value": {
+												"value": "@activity('Get Metadata2').output.childItems",
+												"type": "Expression"
+											}
 										}
 									}
 								]
