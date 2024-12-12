@@ -17,6 +17,9 @@
 		"LS_ADLS_GENERIC_accountKey": {
 			"value": ""
 		},
+		"LS_ADLS_LOG_connectionString": {
+			"value": ""
+		},
 		"LS_API_PARQUET_accountKey": {
 			"value": ""
 		},

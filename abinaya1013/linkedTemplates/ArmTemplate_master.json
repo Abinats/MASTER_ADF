@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_ADLS_GENERIC'"
 		},
+		"LS_ADLS_LOG_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ADLS_LOG'"
+		},
 		"LS_API_PARQUET_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_API_PARQUET'"
@@ -181,6 +185,9 @@
 					},
 					"LS_ADLS_GENERIC_accountKey": {
 						"value": "[parameters('LS_ADLS_GENERIC_accountKey')]"
+					},
+					"LS_ADLS_LOG_connectionString": {
+						"value": "[parameters('LS_ADLS_LOG_connectionString')]"
 					},
 					"LS_API_PARQUET_accountKey": {
 						"value": "[parameters('LS_API_PARQUET_accountKey')]"
@@ -394,6 +401,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'abinaya1013_ArmTemplate_5')]"
+			]
+		},
+		{
+			"name": "abinaya1013_ArmTemplate_7",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'abinaya1013_ArmTemplate_6')]"
 			]
 		}
 	]
