@@ -201,6 +201,30 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "EmptyFolder",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EmptyFolder",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NonEmptyfolder",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NonEmptyFolder",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
