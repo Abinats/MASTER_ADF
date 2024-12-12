@@ -198,18 +198,6 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "column1",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "column1",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
 									"name": "EmptyFolder",
 									"type": "String"
 								},
