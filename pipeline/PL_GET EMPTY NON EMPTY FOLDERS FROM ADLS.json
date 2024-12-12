@@ -149,10 +149,10 @@
 		],
 		"variables": {
 			"empty": {
-				"type": "String"
+				"type": "Array"
 			},
 			"nonempty": {
-				"type": "String"
+				"type": "Array"
 			}
 		},
 		"annotations": []
