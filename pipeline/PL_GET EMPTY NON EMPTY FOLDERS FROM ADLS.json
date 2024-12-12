@@ -30,7 +30,8 @@
 					"dataset": {
 						"referenceName": "DS_ADLS_EF",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
