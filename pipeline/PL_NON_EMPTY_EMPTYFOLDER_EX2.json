@@ -162,7 +162,7 @@
 						"type": "DelimitedTextSource",
 						"additionalColumns": [
 							{
-								"name": "Emptyfolder",
+								"name": "EmptyFolder",
 								"value": {
 									"value": "@variables('empty')",
 									"type": "Expression"
@@ -170,10 +170,7 @@
 							},
 							{
 								"name": "NonEmptyFolder",
-								"value": {
-									"value": "@variables('nonempty')",
-									"type": "Expression"
-								}
+								"value": "$$FILEPATH"
 							}
 						],
 						"storeSettings": {
