@@ -105,7 +105,16 @@
 									{
 										"name": "Append variable1",
 										"type": "AppendVariable",
-										"dependsOn": []
+										"dependsOn": [],
+										"userProperties": [
+											{
+												"name": "empty"
+											}
+										],
+										"typeProperties": {
+											"variableName": "emptyfolder",
+											"value": ""
+										}
 									}
 								]
 							}
@@ -120,6 +129,9 @@
 			},
 			"Nonemptyfolder": {
 				"type": "String"
+			},
+			"emptyfolder": {
+				"type": "Array"
 			}
 		},
 		"annotations": []
