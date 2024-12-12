@@ -109,7 +109,10 @@
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "nonemptyfolder",
-											"value": ""
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
 										}
 									}
 								],
