@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_NONEMPTY_EMPTY_FOLDER",
 	"properties": {
 		"activities": [
 			{
@@ -64,7 +64,13 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "DS_ADLS_EMPTY3",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"folderpath": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								},
 								"fieldList": [
 									"childItems"
