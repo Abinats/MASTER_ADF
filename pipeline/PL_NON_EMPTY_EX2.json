@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_NON_EMPTY_EX2",
 	"properties": {
 		"activities": [
 			{
@@ -109,7 +109,10 @@
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "nonempty",
-											"value": ""
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
 										}
 									}
 								],
