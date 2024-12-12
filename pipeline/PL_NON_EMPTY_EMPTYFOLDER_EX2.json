@@ -118,16 +118,23 @@
 								],
 								"ifTrueActivities": [
 									{
-										"name": "Append variable1",
+										"name": "Append variable3",
 										"type": "AppendVariable",
 										"dependsOn": [],
+										"userProperties": []
+									},
+									{
+										"name": "Set variable1",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "empty",
-											"value": {
-												"value": "@item().name",
-												"type": "Expression"
-											}
+											"value": ""
 										}
 									}
 								]
