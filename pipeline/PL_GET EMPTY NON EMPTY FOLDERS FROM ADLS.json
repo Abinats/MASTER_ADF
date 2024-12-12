@@ -69,16 +69,19 @@
 								},
 								"ifFalseActivities": [
 									{
-										"name": "Append variable2",
-										"type": "AppendVariable",
+										"name": "Set variable2",
+										"type": "SetVariable",
 										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "nonempty",
-											"value": {
-												"value": "@item().name",
-												"type": "Expression"
-											}
+											"value": [
+												""
+											]
 										}
 									}
 								],
