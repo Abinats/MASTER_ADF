@@ -147,12 +147,6 @@
 			},
 			"Nonemptyfolder": {
 				"type": "String"
-			},
-			"emptyfolder": {
-				"type": "Array"
-			},
-			"nonemptyfolder": {
-				"type": "Array"
 			}
 		},
 		"annotations": []
