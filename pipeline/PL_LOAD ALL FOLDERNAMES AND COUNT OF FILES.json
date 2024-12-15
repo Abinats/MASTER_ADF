@@ -115,6 +115,9 @@
 		"variables": {
 			"filecount": {
 				"type": "Integer"
+			},
+			"foldernames": {
+				"type": "Array"
 			}
 		},
 		"annotations": []
