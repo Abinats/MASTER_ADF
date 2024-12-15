@@ -153,7 +153,13 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "empty",
+					"value": [
+						""
+					]
+				}
 			}
 		],
 		"variables": {
