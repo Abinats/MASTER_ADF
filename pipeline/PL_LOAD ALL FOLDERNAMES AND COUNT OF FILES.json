@@ -214,7 +214,7 @@
 							"typeProperties": {
 								"variableName": "foldernames",
 								"value": {
-									"value": "@item().name",
+									"value": "@concat(variables('foldernames'),item().name)",
 									"type": "Expression"
 								}
 							}
