@@ -5,24 +5,12 @@
 			"referenceName": "LS_ADLS",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"FILECOUNT": {
-				"type": "string"
-			},
-			"FOLDERNAMES": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "temp_dataset_hold_foldernames_filecount.txt",
-				"folderPath": {
-					"value": "@dataset().FOLDERNAMES",
-					"type": "Expression"
-				},
 				"fileSystem": "source"
 			},
 			"columnDelimiter": ",",
