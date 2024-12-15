@@ -52,7 +52,7 @@
 									"referenceName": "DS_RESTAPI_COUNTRYNAME",
 									"type": "DatasetReference",
 									"parameters": {
-										"item": "russia"
+										"item": "india"
 									}
 								}
 							],
@@ -61,7 +61,7 @@
 									"referenceName": "DS_JSON_API3",
 									"type": "DatasetReference",
 									"parameters": {
-										"filename": "russia"
+										"filename": "india"
 									}
 								}
 							]
