@@ -156,9 +156,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "nonempty",
-					"value": [
-						""
-					]
+					"value": {
+						"value": "@variables('nonempty')",
+						"type": "Expression"
+					}
 				}
 			}
 		],
