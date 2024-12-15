@@ -137,7 +137,7 @@
 		],
 		"variables": {
 			"filecount": {
-				"type": "String"
+				"type": "Integer"
 			}
 		},
 		"annotations": []
