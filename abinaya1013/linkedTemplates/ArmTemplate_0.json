@@ -554,7 +554,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_ADLS_CUSTOMERADDRESS')]",
+			"name": "[concat(parameters('factoryName'), '/DS_ADLS_COUNTALLFILES')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -563,7 +563,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
-					"filename": {
+					"foldername": {
 						"type": "string"
 					}
 				},
@@ -572,12 +572,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().filename",
+						"fileSystem": {
+							"value": "@dataset().foldername",
 							"type": "Expression"
-						},
-						"folderPath": "CustomerAddress",
-						"fileSystem": "target"
+						}
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
