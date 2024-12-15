@@ -155,7 +155,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "empty",
+					"variableName": "nonempty",
 					"value": [
 						""
 					]
