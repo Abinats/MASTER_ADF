@@ -181,7 +181,7 @@
 				"typeProperties": {
 					"variableName": "nonempty",
 					"value": {
-						"value": "@variables('empty')",
+						"value": "@variables('nonempty')",
 						"type": "Expression"
 					}
 				}
