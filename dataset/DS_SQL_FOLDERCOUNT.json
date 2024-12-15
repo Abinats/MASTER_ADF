@@ -1,0 +1,26 @@
+{
+	"name": "DS_SQL_FOLDERCOUNT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "FolderName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FileCount",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "FolderFileCount"
+		}
+	}
+}
