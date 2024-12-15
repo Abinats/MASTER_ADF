@@ -185,7 +185,17 @@
 							"inputs": [
 								{
 									"referenceName": "DS_ADLS_SOURCE",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filecount": {
+											"value": "@variables('filecount')",
+											"type": "Expression"
+										},
+										"foldernames": {
+											"value": "@variables('foldernames')",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
