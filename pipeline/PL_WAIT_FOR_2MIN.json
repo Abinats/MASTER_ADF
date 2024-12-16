@@ -151,6 +151,9 @@
 				"defaultValue": 120
 			}
 		},
+		"folder": {
+			"name": "PRACTICAL_ONLIVE"
+		},
 		"annotations": []
 	}
 }
