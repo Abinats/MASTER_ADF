@@ -24,6 +24,9 @@
 			"transformations": [
 				{
 					"name": "pivot1"
+				},
+				{
+					"name": "join1"
 				}
 			],
 			"scriptLines": [
@@ -41,14 +44,19 @@
 				"     columnNaming: '$N$V',",
 				"     lateral: true,",
 				"     partitionBy('hash', 1)) ~> pivot1",
-				"pivot1 sink(allowSchemaDrift: true,",
+				"pivot1 join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> sink1"
+				"     partitionBy('roundRobin', 2)) ~> sink1"
 			]
 		}
 	}
