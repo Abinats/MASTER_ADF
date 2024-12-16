@@ -160,10 +160,17 @@
 									"additionalColumns": [
 										{
 											"name": "Foldernames",
-											"value": "$$FILEPATH"
+											"value": {
+												"value": "@variables('foldernames')",
+												"type": "Expression"
+											}
 										},
 										{
-											"value": "$$FILEPATH"
+											"name": "Filecount",
+											"value": {
+												"value": "@variables('filecount')",
+												"type": "Expression"
+											}
 										}
 									],
 									"storeSettings": {
