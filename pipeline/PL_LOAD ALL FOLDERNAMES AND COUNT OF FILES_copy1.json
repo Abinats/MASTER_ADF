@@ -128,7 +128,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "foldernames",
+								"variableName": "foldername",
 								"value": {
 									"value": "@item().name",
 									"type": "Expression"
@@ -161,14 +161,14 @@
 										{
 											"name": "Foldernames",
 											"value": {
-												"value": "@variables('foldernames')",
+												"value": "@{variables('foldernames')}",
 												"type": "Expression"
 											}
 										},
 										{
 											"name": "Filecount",
 											"value": {
-												"value": "@variables('filecount')",
+												"value": "@{variables('filecount')}",
 												"type": "Expression"
 											}
 										}
@@ -190,6 +190,30 @@
 								"enableStaging": false,
 								"translator": {
 									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "Foldernames",
+												"type": "String"
+											},
+											"sink": {
+												"name": "FolderName",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										},
+										{
+											"source": {
+												"name": "Filecount",
+												"type": "String"
+											},
+											"sink": {
+												"name": "FileCount",
+												"type": "Int32",
+												"physicalType": "int"
+											}
+										}
+									],
 									"typeConversion": true,
 									"typeConversionSettings": {
 										"allowDataTruncation": true,
@@ -218,7 +242,7 @@
 			"filecount": {
 				"type": "Integer"
 			},
-			"foldernames": {
+			"foldername": {
 				"type": "String"
 			}
 		},
