@@ -22,7 +22,7 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "select * from dbo.CarModels\n\nselect * from dbo.Employee"
+							"text": "select * from dbo.CarModels\n\nselect * from dbo.Employee\nprint 'Executed'"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00",
