@@ -165,6 +165,9 @@
 						"type": "Array"
 					}
 				},
+				"folder": {
+					"name": "APPEND VARIABLE"
+				},
 				"annotations": []
 			},
 			"dependsOn": []
@@ -225,6 +228,9 @@
 					"ouput_x": {
 						"type": "Array"
 					}
+				},
+				"folder": {
+					"name": "APPEND VARIABLE"
 				},
 				"annotations": []
 			},

@@ -10,36 +10,515 @@
 		"storage_event-trigger3_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
-		},
-		"storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_fname": {
-			"type": "string",
-			"defaultValue": "@triggerBody().fileName"
-		},
-		"storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_cname": {
-			"type": "string",
-			"defaultValue": "@triggerBody().filePath"
-		},
-		"storage_event_trigger2_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
-		},
-		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname": {
-			"type": "string",
-			"defaultValue": "@triggerBody().fileName"
-		},
-		"storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_cname": {
-			"type": "string",
-			"defaultValue": "@triggerBody().folderPath"
-		},
-		"storage_event_trigger_dept_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/dc271e3c-2651-4aa6-8f51-41ccb982b47d/resourceGroups/New_resource/providers/Microsoft.Storage/storageAccounts/azuretrassig"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_script_example')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Script1",
+						"type": "Script",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"linkedServiceName": {
+							"referenceName": "LS_SQL_SERVER",
+							"type": "LinkedServiceReference"
+						},
+						"typeProperties": {
+							"scripts": [
+								{
+									"type": "Query",
+									"text": "select * from dbo.CarModels\n\nselect * from dbo.Employee"
+								}
+							],
+							"scriptBlockExecutionTimeout": "02:00:00"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SQLSERVER_CARMODELS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_SERVER",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MODEL_NO",
+						"type": "varchar"
+					},
+					{
+						"name": "MODEL_NAME",
+						"type": "varchar"
+					},
+					{
+						"name": "MANUFACTURING_COUNTRY",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CarModels"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_SQLSERVER_EMPLOYEE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_SERVER",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "name",
+						"type": "varchar"
+					},
+					{
+						"name": "city",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Employee"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADVANCE_QUESTION1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT_CSV",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						},
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT",
+								"type": "DatasetReference"
+							},
+							"name": "srclookup"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						},
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT",
+								"type": "DatasetReference"
+							},
+							"name": "sink2"
+						}
+					],
+					"transformations": [
+						{
+							"name": "select1"
+						},
+						{
+							"name": "lookup1"
+						},
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "split1"
+						},
+						{
+							"name": "alterRow1"
+						},
+						{
+							"name": "alterRow2"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> source1",
+						"source(output(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> srclookup",
+						"srclookup select(mapColumn(",
+						"          CID_lkp = CID,",
+						"          Name_lkp = Name,",
+						"          MailID_lkp = MailID",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"source1, srclookup lookup(source1@CID == srclookup@CID",
+						"     && source1@MailID == srclookup@MailID",
+						"     && source1@Name == srclookup@Name,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookup1",
+						"lookup1 filter(mod(source1@CID,2)!=0) ~> filter1",
+						"filter1 split(isNull(srclookup@CID),",
+						"     !isNull(srclookup@CID) || (source1@Name !=srclookup@Name) || (source1@MailID !=srclookup@MailID),",
+						"     disjoint: false) ~> split1@(insert, update)",
+						"split1@insert alterRow(insertIf(isInsert())) ~> alterRow1",
+						"split1@update alterRow(updateIf(isUpdate())) ~> alterRow2",
+						"alterRow1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+						"alterRow2 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:false,",
+						"     updateable:true,",
+						"     upsertable:false,",
+						"     keys:['CID','Name','MailID'],",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADV_QUESTION1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT_CSV",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DS_CUSTOMERDATA_TGT",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "derivedColumn1"
+						},
+						{
+							"name": "AlterRow1"
+						},
+						{
+							"name": "split1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> source1",
+						"derivedColumn1 filter(toInteger(CID)%2!=0) ~> filter1",
+						"source1 derive(CID = toInteger(CID)) ~> derivedColumn1",
+						"filter1 alterRow(insertIf(isNull(CID)),",
+						"     updateIf(!isNull(CID))) ~> AlterRow1",
+						"AlterRow1 split(isInsert(),",
+						"     isUpdate(),",
+						"     disjoint: false) ~> split1@(insert, update)",
+						"split1@insert sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          CID as integer,",
+						"          Name as string,",
+						"          MailID as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADV_QUESTION3_REMOVE_DUPLICATE')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DS_CAR_DUP",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DS_JSON",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "aggregate1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          ID as integer,",
+						"          MODEL_NO as string,",
+						"          MODEL_NAME as string,",
+						"          MANUFACTURING_COUNTRY as string,",
+						"          START_DATE as date",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> source1",
+						"source1 aggregate(groupBy(ID),",
+						"     MANUFACTURING_COUNTRY = first(MANUFACTURING_COUNTRY),",
+						"          MODEL_NAME = last(MODEL_NAME)) ~> aggregate1",
+						"aggregate1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PIVOT')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DS_ADLS_PIVOT_SRC",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DS_PIVOT_TARGET",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "pivot1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          customer_id as string,",
+						"          product_name as string,",
+						"          sales as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> source1",
+						"source1 pivot(groupBy(customer_id),",
+						"     pivotBy(product_name, ['mobile', 'refrigerator', 'washing']),",
+						"     pname_ = max(sales),",
+						"     columnNaming: '$N$V',",
+						"     lateral: true,",
+						"     partitionBy('hash', 1)) ~> pivot1",
+						"pivot1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('roundRobin', 2)) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_QUESTION5')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DS_PRODUCT_SRC",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DS_PRODUCT_TGT",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "aggregate1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          ProductID as integer,",
+						"          Name as string,",
+						"          ProductNumber as string,",
+						"          Color as string,",
+						"          StandardCost as double,",
+						"          ListPrice as double,",
+						"          Size as string,",
+						"          Weight as double,",
+						"          ProductCategoryID as integer,",
+						"          ProductModelID as integer,",
+						"          SellStartDate as date,",
+						"          SellEndDate as date,",
+						"          DiscontinuedDate as date,",
+						"          ThumbNailPhoto as string,",
+						"          ThumbnailPhotoFileName as string,",
+						"          rowguid as string,",
+						"          ModifiedDate as date",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> source1",
+						"source1 filter(Color!='Blue') ~> filter1",
+						"filter1 aggregate(groupBy(Name,",
+						"          Color),",
+						"     ListPrice = max(ListPrice)) ~> aggregate1",
+						"aggregate1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SCD_TYPE3')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
@@ -253,7 +732,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/ADV_QUESTION1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_API_QUESTION4_LOGICAPP_Failure')]",
@@ -643,9 +1124,14 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "ON_PREM SQL TO ADF AND VICE VERSA"
+				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_SQLSERVER_CARMODELS')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_CARMODELS_AZUREDB_SQL_SERVER_OMPREMISE')]",
@@ -756,9 +1242,14 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "ON_PREM SQL TO ADF AND VICE VERSA"
+				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_SQLSERVER_CARMODELS')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_EMPLOYEE_ON_PREMISE_SQLSERVER_ADLS')]",
@@ -864,9 +1355,14 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "ON_PREM SQL TO ADF AND VICE VERSA"
+				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_SQLSERVER_EMPLOYEE')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_EMPLOYEE_ON_PREMISE_SQLSERVER_Azure_db')]",
@@ -968,9 +1464,14 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "ON_PREM SQL TO ADF AND VICE VERSA"
+				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_SQLSERVER_EMPLOYEE')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_PIVOT')]",
@@ -1012,9 +1513,14 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "PRACTICE"
+				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/PIVOT')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/TUMBLING_WINDOW2')]",
@@ -1071,102 +1577,6 @@
 						"Microsoft.Storage.BlobCreated",
 						"Microsoft.Storage.BlobDeleted"
 					]
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/storage_event_trigger2')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_API_QUESTION2_6",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"fname": "[parameters('storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_fname')]",
-							"cname": "[parameters('storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_cname')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/targetapi/blobs/india",
-					"blobPathEndsWith": ".json",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('storage_event_trigger2_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated",
-						"Microsoft.Storage.BlobDeleted"
-					]
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/storage_event_trigger_dept')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "PL_STORAGE_TRIGGERS_PARAM",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"fname": "[parameters('storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_fname')]",
-							"cname": "[parameters('storage_event_trigger_dept_properties_PL_STORAGE_TRIGGERS_PARAM_parameters_cname')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/sourcefiles/blobs/dept",
-					"blobPathEndsWith": ".csv",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('storage_event_trigger_dept_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated",
-						"Microsoft.Storage.BlobDeleted"
-					]
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/tumbling_window')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "PL_csv_EMP",
-						"type": "PipelineReference"
-					},
-					"parameters": {}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 8,
-					"startTime": "2024-11-22T23:00:00Z",
-					"endTime": "2024-11-23T08:25:09Z",
-					"delay": "00:00:00",
-					"maxConcurrency": 50,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
 				}
 			},
 			"dependsOn": []
