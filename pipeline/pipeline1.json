@@ -73,14 +73,17 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"waitTimeInSeconds": 91
+					"waitTimeInSeconds": {
+						"value": "@pipeline().parameters.waittime",
+						"type": "Expression"
+					}
 				}
 			}
 		],
 		"parameters": {
 			"waittime": {
 				"type": "int",
-				"defaultValue": 2
+				"defaultValue": 120
 			}
 		},
 		"annotations": []
