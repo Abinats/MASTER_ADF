@@ -158,7 +158,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "insert into dbo.FolderFileCount \nselect '@{item().NAME}',@{variables('filecount')};\n\nselect 1 as output",
+										"value": "insert into dbo.FolderFileCount \nselect '@{item().NAME}',@{variables('filecount')};\n\n",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
