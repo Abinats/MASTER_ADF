@@ -155,8 +155,34 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"additionalColumns": [
+										{
+											"name": "Foldernames",
+											"value": "$$FILEPATH"
+										},
+										{
+											"value": "$$FILEPATH"
+										}
+									],
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
 								"enableStaging": false
-							}
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_temp_dataset_hold_foldernames_filecount",
+									"type": "DatasetReference"
+								}
+							]
 						}
 					]
 				}
