@@ -32,7 +32,8 @@
 							"linkedServiceName": {
 								"referenceName": "LS_ADLS_LOG",
 								"type": "LinkedServiceReference"
-							}
+							},
+							"path": "logfiles2"
 						}
 					}
 				}
