@@ -161,7 +161,7 @@
 										{
 											"name": "Foldernames",
 											"value": {
-												"value": "@{variables('foldernames')}",
+												"value": "@{variables('foldername')}",
 												"type": "Expression"
 											}
 										},
@@ -190,6 +190,30 @@
 								"enableStaging": false,
 								"translator": {
 									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "Foldernames",
+												"type": "String"
+											},
+											"sink": {
+												"name": "FolderName",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										},
+										{
+											"source": {
+												"name": "Filecount",
+												"type": "String"
+											},
+											"sink": {
+												"name": "FileCount",
+												"type": "Int32",
+												"physicalType": "int"
+											}
+										}
+									],
 									"typeConversion": true,
 									"typeConversionSettings": {
 										"allowDataTruncation": true,
