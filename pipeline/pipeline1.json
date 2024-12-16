@@ -21,7 +21,8 @@
 				"typeProperties": {
 					"scripts": [
 						{
-							"type": "Query"
+							"type": "Query",
+							"text": "select * from dbo.CarModels\n\nselect * from dbo.Employee"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
