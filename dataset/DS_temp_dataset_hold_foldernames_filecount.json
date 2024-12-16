@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "temp_dataset_hold_foldernames_filecount.txt",
+				"fileName": "dummyfile.csv",
 				"fileSystem": "source"
 			},
 			"columnDelimiter": ",",
