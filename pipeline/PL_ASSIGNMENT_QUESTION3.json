@@ -140,6 +140,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "OTHER_ASSIGMENT"
+		},
 		"annotations": []
 	}
 }

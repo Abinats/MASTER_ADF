@@ -195,6 +195,9 @@
 				"type": "Array"
 			}
 		},
+		"folder": {
+			"name": "GET EMPTY AND NON EMPTY FOLDERS"
+		},
 		"annotations": []
 	}
 }

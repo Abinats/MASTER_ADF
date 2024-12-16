@@ -246,6 +246,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "LOAD ALL FOLDERNAMES AND COUNT OF FILES"
+		},
 		"annotations": []
 	}
 }

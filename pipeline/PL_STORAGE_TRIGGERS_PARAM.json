@@ -79,6 +79,9 @@
 				"type": "string"
 			}
 		},
+		"folder": {
+			"name": "TRIGGERS WITH PARAMETERS"
+		},
 		"annotations": []
 	}
 }

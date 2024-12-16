@@ -115,6 +115,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "APPEND VARIABLE"
+		},
 		"annotations": []
 	}
 }
