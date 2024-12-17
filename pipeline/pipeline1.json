@@ -12,6 +12,12 @@
 				}
 			}
 		],
+		"parameters": {
+			"fileexist": {
+				"type": "string",
+				"defaultValue": "false"
+			}
+		},
 		"annotations": []
 	}
 }
