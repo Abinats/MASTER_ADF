@@ -187,7 +187,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "DS_SQL_CUSTOMER",
+						"referenceName": "DS_SQL_CUSTOMER_DATA",
 						"type": "DatasetReference"
 					}
 				}
