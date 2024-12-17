@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@bool(variables('filleexist'))",
+						"value": "@bool(variables('fileexist'))",
 						"type": "Expression"
 					},
 					"activities": [
