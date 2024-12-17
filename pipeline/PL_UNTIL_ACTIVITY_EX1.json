@@ -131,7 +131,9 @@
 					"sink": {
 						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -152,7 +154,10 @@
 				"outputs": [
 					{
 						"referenceName": "DS_SQL_CUSTOMER",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": "Temp_customer"
+						}
 					}
 				]
 			}
