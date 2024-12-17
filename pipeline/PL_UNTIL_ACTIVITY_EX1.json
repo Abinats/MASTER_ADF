@@ -190,7 +190,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "varname",
+								"variableName": "statusmessage",
 								"value": {
 									"value": "@activity('Stored procedure1').output.firstRow.StatusMessage",
 									"type": "Expression"
@@ -206,7 +206,7 @@
 				"type": "String",
 				"defaultValue": "false"
 			},
-			"varname": {
+			"statusmessage": {
 				"type": "String"
 			}
 		},
