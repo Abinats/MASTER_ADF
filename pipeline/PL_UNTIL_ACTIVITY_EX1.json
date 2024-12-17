@@ -118,18 +118,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "DS_CUSTOMER",
+						"referenceName": "DS_SQL_CUSTOMER_DATA",
 						"type": "DatasetReference"
 					}
 				}
@@ -153,6 +147,9 @@
 					"secureInput": false
 				},
 				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[DeleteCustomerByName]"
+				},
 				"linkedServiceName": {
 					"referenceName": "LS_SQL",
 					"type": "LinkedServiceReference"
