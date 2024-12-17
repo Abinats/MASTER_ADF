@@ -8,13 +8,17 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"timeout": "0.12:00:00"
+					"expression": {
+						"value": "@bool(variables('filleexist'))",
+						"type": "Expression"
+					},
+					"timeout": "0.00:01:00"
 				}
 			}
 		],
-		"parameters": {
-			"fileexist": {
-				"type": "string",
+		"variables": {
+			"filleexist": {
+				"type": "String",
 				"defaultValue": "false"
 			}
 		},
