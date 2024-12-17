@@ -177,6 +177,12 @@
 				}
 			}
 		],
+		"parameters": {
+			"MiddleName": {
+				"type": "string",
+				"defaultValue": "M."
+			}
+		},
 		"variables": {
 			"fileexist": {
 				"type": "String",
