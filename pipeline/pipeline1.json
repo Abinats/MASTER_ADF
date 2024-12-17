@@ -21,7 +21,8 @@
 				"typeProperties": {
 					"scripts": [
 						{
-							"type": "Query"
+							"type": "Query",
+							"text": "CREATE TABLE Books (\n    BookID INT PRIMARY KEY AUTO_INCREMENT,  \n    Title VARCHAR(255) NOT NULL,        \n    Author VARCHAR(255) NOT NULL,          \n    Publisher VARCHAR(255)\n)"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
