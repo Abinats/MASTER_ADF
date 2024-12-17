@@ -149,7 +149,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[DeleteCustomerByName]"
+					"storedProcedureName": "[dbo].[DeleteCustomerByName]",
+					"storedProcedureParameters": {
+						"MiddleName": {
+							"value": "",
+							"type": "String"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "LS_SQL",
