@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_UNTIL",
 	"properties": {
 		"activities": [
 			{
@@ -86,7 +86,7 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "filleexist",
+											"variableName": "fileexist",
 											"value": "true"
 										}
 									}
