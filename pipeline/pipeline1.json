@@ -59,6 +59,22 @@
 									"value": "@bool(activity('Get Metadata1').output.exists)",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "Set variable2",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "filleexist",
+											"value": "false"
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "Set variable1",
@@ -71,7 +87,7 @@
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "filleexist",
-											"value": "flase"
+											"value": "true"
 										}
 									}
 								]
