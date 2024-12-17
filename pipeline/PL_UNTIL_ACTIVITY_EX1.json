@@ -191,7 +191,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "varname",
-								"value": ""
+								"value": {
+									"value": "@greater(activity('Stored procedure1').output.firstRow.RowsAffected,0)",
+									"type": "Expression"
+								}
 							}
 						}
 					]
