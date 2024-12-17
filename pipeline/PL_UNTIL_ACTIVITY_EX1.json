@@ -163,7 +163,10 @@
 								"storedProcedureName": "[dbo].[DeleteCustomerByName]",
 								"storedProcedureParameters": {
 									"MiddleName": {
-										"value": "",
+										"value": {
+											"value": "@pipeline().parameters.MiddleName",
+											"type": "Expression"
+										},
 										"type": "String"
 									}
 								}
