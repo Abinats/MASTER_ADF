@@ -22,7 +22,7 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "\n\nINSERT INTO Books (BookId,Title, Author, Publisher)\nVALUES (100,'To Kill a Mockingbird', 'Harper Lee', 'J.B. Lippincott & Co.')"
+							"text": "INSERT INTO Books (BookId,Title, Author, Publisher)\nVALUES (100,'To Kill a Mockingbird', 'Harper Lee', 'J.B. Lippincott & Co.')"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
