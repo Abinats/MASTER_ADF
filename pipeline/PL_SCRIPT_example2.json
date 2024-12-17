@@ -22,7 +22,7 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "CREATE TABLE Books (\n    BookID INT PRIMARY KEY ,  \n    Title VARCHAR(255) NOT NULL,        \n    Author VARCHAR(255) NOT NULL,          \n    Publisher VARCHAR(255)\n)\n\nINSERT INTO Books (BookID,Title, Author, Publisher)\nVALUES (1,'The Great Gatsby', 'F. Scott Fitzgerald', 'Charles Scribner\\')"
+							"text": "\n\nINSERT INTO Books (Title, Author, Publisher)\nVALUES ('To Kill a Mockingbird', 'Harper Lee', 'J.B. Lippincott & Co.')"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
