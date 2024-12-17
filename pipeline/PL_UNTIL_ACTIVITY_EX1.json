@@ -172,6 +172,27 @@
 								"referenceName": "LS_SQL",
 								"type": "LinkedServiceReference"
 							}
+						},
+						{
+							"name": "Set variable3",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Stored procedure1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "varname",
+								"value": ""
+							}
 						}
 					]
 				}
