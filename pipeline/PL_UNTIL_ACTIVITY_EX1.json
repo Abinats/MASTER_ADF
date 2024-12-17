@@ -192,7 +192,7 @@
 							"typeProperties": {
 								"variableName": "varname",
 								"value": {
-									"value": "@greater(activity('Stored procedure1').output.firstRow.RowsAffected,0)",
+									"value": "@activity('Stored procedure1').output.firstRow.StatusMessage",
 									"type": "Expression"
 								}
 							}
