@@ -139,7 +139,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_CUST_CUST_ADDRESS_TGT",
+						"referenceName": "DS_CUST_ADDRESS",
 						"type": "DatasetReference"
 					}
 				]
