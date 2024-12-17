@@ -395,9 +395,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"storage_event-trigger3_properties_typeProperties_scope": {
-						"value": "[parameters('storage_event-trigger3_properties_typeProperties_scope')]"
 					}
 				}
 			},
@@ -418,6 +415,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"storage_event-trigger3_properties_typeProperties_scope": {
+						"value": "[parameters('storage_event-trigger3_properties_typeProperties_scope')]"
 					},
 					"storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_fname": {
 						"value": "[parameters('storage_event_trigger2_properties_PL_API_QUESTION2_6_parameters_fname')]"
