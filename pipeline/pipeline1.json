@@ -70,7 +70,7 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "filleexist",
+											"variableName": "fileexist",
 											"value": "false"
 										}
 									}
@@ -99,7 +99,7 @@
 			}
 		],
 		"variables": {
-			"filleexist": {
+			"fileexist": {
 				"type": "String",
 				"defaultValue": "false"
 			}
