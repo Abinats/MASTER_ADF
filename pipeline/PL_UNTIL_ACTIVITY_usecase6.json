@@ -210,7 +210,17 @@
 										}
 									}
 								],
-								"scriptBlockExecutionTimeout": "02:00:00"
+								"scriptBlockExecutionTimeout": "02:00:00",
+								"logSettings": {
+									"logDestination": "ExternalStore",
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "LS_ADLS_LOG",
+											"type": "LinkedServiceReference"
+										},
+										"path": "logfiles2"
+									}
+								}
 							}
 						}
 					]
