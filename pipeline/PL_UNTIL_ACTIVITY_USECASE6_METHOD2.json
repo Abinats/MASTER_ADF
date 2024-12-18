@@ -139,6 +139,7 @@
 											},
 											"sink": {
 												"type": "AzureSqlSink",
+												"preCopyScript": "TRUNCATE TABLE dbo.temp_customer",
 												"writeBehavior": "insert",
 												"sqlWriterUseTableLock": false,
 												"disableMetricsCollection": false
