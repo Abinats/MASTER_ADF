@@ -307,7 +307,7 @@
 							"typeProperties": {
 								"variableName": "DeletionStatus",
 								"value": {
-									"value": "@concat('Not Deleted',activity('Lookup2').output.value)",
+									"value": "@concat('Deleted',activity('Lookup2').output.value)",
 									"type": "Expression"
 								}
 							}
@@ -326,7 +326,7 @@
 							"typeProperties": {
 								"variableName": "DeletionStatus",
 								"value": {
-									"value": "@concat('Deleted-',activity('Lookup2').output.value[0].MiddleName)\n",
+									"value": "@concat('Not Deleted-',activity('Lookup2').output.value[0].MiddleName)\n",
 									"type": "Expression"
 								}
 							}
