@@ -264,7 +264,7 @@
 											"scripts": [
 												{
 													"type": "Query",
-													"text": "select MiddleName from dbo.temp_customer"
+													"text": "select MiddleName from dbo.temp_customer\nprint'MiddleName'"
 												}
 											],
 											"scriptBlockExecutionTimeout": "02:00:00",
@@ -275,7 +275,7 @@
 														"referenceName": "LS_ADLS_LOG",
 														"type": "LinkedServiceReference"
 													},
-													"path": "logfiles2"
+													"path": "logfiles2/scriptactivity-logs"
 												}
 											}
 										}
