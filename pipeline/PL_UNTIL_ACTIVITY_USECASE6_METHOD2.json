@@ -137,11 +137,35 @@
 													"type": "DelimitedTextReadSettings"
 												}
 											},
-											"enableStaging": false
+											"sink": {
+												"type": "AzureSqlSink",
+												"sqlWriterStoredProcedureName": "[dbo].[DeleteCustomerByName]",
+												"storedProcedureParameters": {
+													"MiddleName": {
+														"type": "String"
+													}
+												},
+												"disableMetricsCollection": false
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
 										},
 										"inputs": [
 											{
 												"referenceName": "DS_CUSTOMER",
+												"type": "DatasetReference"
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "DS_SQL_CUSTOMER_DATA",
 												"type": "DatasetReference"
 											}
 										]
