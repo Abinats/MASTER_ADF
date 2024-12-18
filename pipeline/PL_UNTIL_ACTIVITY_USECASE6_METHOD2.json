@@ -269,36 +269,50 @@
 											},
 											"firstRowOnly": false
 										}
-									},
-									{
-										"name": "Set variable3",
-										"type": "SetVariable",
-										"dependsOn": [
-											{
-												"activity": "Lookup2",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"variableName": "Message",
-											"value": {
-												"value": "@concat('Deleted-',activity('Lookup2').output.value[0].MiddleName)\n",
-												"type": "Expression"
-											}
-										}
 									}
 								]
 							}
 						}
 					],
 					"timeout": "0.00:02:00"
+				}
+			},
+			{
+				"name": "If Condition2",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Until1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(variables('DeletionStatus'),'Deleted Successfully' )",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Set variable3",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Message",
+								"value": {
+									"value": "@concat('Deleted-',activity('Lookup2').output.value[0].MiddleName)\n",
+									"type": "Expression"
+								}
+							}
+						}
+					]
 				}
 			}
 		],
