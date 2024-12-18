@@ -221,7 +221,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "DeletedCustomerCount",
+					"variableName": "TotalCustomerCount",
 					"value": {
 						"value": "@string(activity('Lookup2').output.count)",
 						"type": "Expression"
@@ -239,7 +239,7 @@
 				"type": "String",
 				"defaultValue": "false"
 			},
-			"DeletedCustomerCount": {
+			"TotalCustomerCount": {
 				"type": "String"
 			}
 		},
