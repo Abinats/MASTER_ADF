@@ -287,11 +287,8 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "Message",
-											"value": {
-												"value": "@concat('Deleted-',activity('Lookup2').output.value[0].MiddleName)",
-												"type": "Expression"
-											}
+											"variableName": "pipelineReturnValue",
+											"setSystemVariable": true
 										}
 									}
 								]
