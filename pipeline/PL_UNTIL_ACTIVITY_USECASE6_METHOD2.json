@@ -236,52 +236,6 @@
 											"referenceName": "LS_SQL",
 											"type": "LinkedServiceReference"
 										}
-									},
-									{
-										"name": "Script1",
-										"type": "Script",
-										"dependsOn": [
-											{
-												"activity": "Stored procedure1",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "0.12:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"linkedServiceName": {
-											"referenceName": "LS_SQL",
-											"type": "LinkedServiceReference"
-										},
-										"typeProperties": {
-											"scripts": [
-												{
-													"type": "Query",
-													"text": {
-														"value": "@activity('Stored procedure1').output",
-														"type": "Expression"
-													}
-												}
-											],
-											"scriptBlockExecutionTimeout": "02:00:00",
-											"logSettings": {
-												"logDestination": "ExternalStore",
-												"logLocationSettings": {
-													"linkedServiceName": {
-														"referenceName": "LS_ADLS_LOG",
-														"type": "LinkedServiceReference"
-													},
-													"path": "logfiles2/scriptactivity-logs"
-												}
-											}
-										}
 									}
 								]
 							}
