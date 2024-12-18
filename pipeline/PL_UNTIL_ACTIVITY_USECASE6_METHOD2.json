@@ -265,7 +265,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "DS_CUSTOMERDATA",
+												"referenceName": "DS_SQL_CUSTOMER_DATA",
 												"type": "DatasetReference"
 											}
 										]
