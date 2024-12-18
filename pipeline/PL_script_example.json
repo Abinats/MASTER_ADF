@@ -39,6 +39,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "SCRIPT_ACTIVITY"
+		},
 		"annotations": []
 	}
 }
