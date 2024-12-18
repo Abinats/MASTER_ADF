@@ -306,7 +306,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "DeletionStatus",
-								"value": ""
+								"value": {
+									"value": "@concat('Not Deleted',activity('Lookup2').output.value)",
+									"type": "Expression"
+								}
 							}
 						}
 					],
