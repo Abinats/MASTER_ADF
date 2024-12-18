@@ -30,8 +30,33 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
+			},
+			{
+				"name": "Until1",
+				"type": "Until",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@bool",
+						"type": "Expression"
+					},
+					"timeout": "0.00:02:00"
+				}
 			}
 		],
+		"variables": {
+			"FileExist": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
