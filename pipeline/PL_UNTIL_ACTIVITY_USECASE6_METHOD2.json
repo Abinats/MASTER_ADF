@@ -259,7 +259,7 @@
 										"typeProperties": {
 											"source": {
 												"type": "AzureSqlSource",
-												"sqlReaderQuery": "SELECT MiddleName FROM dbo.customers ",
+												"sqlReaderQuery": "select MiddleName from dbo.temp_customer",
 												"queryTimeout": "02:00:00",
 												"partitionOption": "None"
 											},
@@ -289,7 +289,7 @@
 										"typeProperties": {
 											"variableName": "Message",
 											"value": {
-												"value": "@activity('Stored procedure1').output",
+												"value": "@concat('Deleted-',activity('Lookup2').output.value[0].MiddleName)\n",
 												"type": "Expression"
 											}
 										}
