@@ -155,7 +155,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[DeleteCustomerByName]",
+					"storedProcedureName": "[dbo].[DeleteCustomerByMiddleName]",
 					"storedProcedureParameters": {
 						"MiddleName": {
 							"value": {
@@ -169,30 +169,6 @@
 				"linkedServiceName": {
 					"referenceName": "LS_SQL",
 					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Set variable3",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Stored procedure1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "status",
-					"value": {
-						"value": "@activity('Stored procedure1').output",
-						"type": "Expression"
-					}
 				}
 			}
 		],
