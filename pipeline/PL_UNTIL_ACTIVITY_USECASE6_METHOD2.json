@@ -263,9 +263,9 @@
 										"typeProperties": {
 											"scripts": [
 												{
-													"type": "Query",
+													"type": "NonQuery",
 													"text": {
-														"value": "@concat('Deleted ', pipeline().parameters.MiddleName)\n",
+														"value": "@activity('Stored procedure1').output",
 														"type": "Expression"
 													}
 												}
