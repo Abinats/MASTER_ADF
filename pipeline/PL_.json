@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_",
 	"properties": {
 		"activities": [
 			{
@@ -158,7 +158,10 @@
 					"storedProcedureName": "[dbo].[DeleteCustomerByName]",
 					"storedProcedureParameters": {
 						"MiddleName": {
-							"value": "",
+							"value": {
+								"value": "@pipeline().parameters.MiddleName",
+								"type": "Expression"
+							},
 							"type": "String"
 						}
 					}
