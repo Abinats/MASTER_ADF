@@ -142,6 +142,15 @@
 												"type": "AzureSqlSink",
 												"preCopyScript": "TRUNCATE TABLE dbo.temp_customer",
 												"sqlWriterStoredProcedureName": "[dbo].[DeleteCustomerByMiddleName]",
+												"storedProcedureParameters": {
+													"MiddleName": {
+														"type": "String",
+														"value": {
+															"value": "@pipeline().parameters.MiddleName",
+															"type": "Expression"
+														}
+													}
+												},
 												"disableMetricsCollection": false
 											},
 											"enableStaging": false,
