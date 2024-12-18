@@ -265,7 +265,7 @@
 												{
 													"type": "Query",
 													"text": {
-														"value": "@pipeline().parameters.MiddleName",
+														"value": "@concat('Deleted',pipeline().parameters.MiddleName)",
 														"type": "Expression"
 													}
 												}
