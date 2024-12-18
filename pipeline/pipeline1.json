@@ -48,6 +48,22 @@
 						"value": "@bool(variables('FileExist'))",
 						"type": "Expression"
 					},
+					"activities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "FileExist",
+								"value": "true"
+							}
+						}
+					],
 					"timeout": "0.00:02:00"
 				}
 			}
