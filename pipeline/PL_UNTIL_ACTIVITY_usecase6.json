@@ -196,6 +196,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "UNTIL_ACTIVITY_USECASE"
+		},
 		"annotations": []
 	}
 }
