@@ -263,7 +263,7 @@
 										"typeProperties": {
 											"scripts": [
 												{
-													"type": "NonQuery",
+													"type": "Query",
 													"text": {
 														"value": "@activity('Stored procedure1').output",
 														"type": "Expression"
