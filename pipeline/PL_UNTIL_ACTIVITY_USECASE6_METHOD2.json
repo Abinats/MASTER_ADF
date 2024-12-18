@@ -287,8 +287,11 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "pipelineReturnValue",
-											"setSystemVariable": true
+											"variableName": "",
+											"value": {
+												"value": "@activity('Stored procedure1').output.message",
+												"type": "Expression"
+											}
 										}
 									}
 								]
