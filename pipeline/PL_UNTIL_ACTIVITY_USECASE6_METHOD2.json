@@ -139,12 +139,8 @@
 											},
 											"sink": {
 												"type": "AzureSqlSink",
-												"sqlWriterStoredProcedureName": "[dbo].[DeleteCustomerByName]",
-												"storedProcedureParameters": {
-													"MiddleName": {
-														"type": "String"
-													}
-												},
+												"writeBehavior": "insert",
+												"sqlWriterUseTableLock": false,
 												"disableMetricsCollection": false
 											},
 											"enableStaging": false,
