@@ -141,8 +141,7 @@
 											"sink": {
 												"type": "AzureSqlSink",
 												"preCopyScript": "TRUNCATE TABLE dbo.temp_customer",
-												"writeBehavior": "insert",
-												"sqlWriterUseTableLock": false,
+												"sqlWriterStoredProcedureName": "[dbo].[DeleteCustomerByMiddleName]",
 												"disableMetricsCollection": false
 											},
 											"enableStaging": false,
