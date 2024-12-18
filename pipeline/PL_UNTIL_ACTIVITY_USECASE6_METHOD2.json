@@ -287,9 +287,9 @@
 										},
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "",
+											"variableName": "Message",
 											"value": {
-												"value": "@activity('Stored procedure1').output.message",
+												"value": "@activity('Stored procedure1').output.Message",
 												"type": "Expression"
 											}
 										}
