@@ -222,7 +222,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "status",
-					"value": ""
+					"value": {
+						"value": "@activity('Lookup2').output.count",
+						"type": "Expression"
+					}
 				}
 			}
 		],
