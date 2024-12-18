@@ -288,7 +288,7 @@
 										"typeProperties": {
 											"variableName": "Message",
 											"value": {
-												"value": "@concat('Deleted',activity('Lookup2').output.firstRow.MiddleName)",
+												"value": "@concat('Deleted-',activity('Lookup2').output.firstRow.MiddleName)",
 												"type": "Expression"
 											}
 										}
