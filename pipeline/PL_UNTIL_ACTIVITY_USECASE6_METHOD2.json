@@ -258,6 +258,12 @@
 										"typeProperties": {
 											"source": {
 												"type": "AzureSqlSource",
+												"sqlReaderStoredProcedureName": "[dbo].[DeleteCustomerByName]",
+												"storedProcedureParameters": {
+													"MiddleName": {
+														"type": "String"
+													}
+												},
 												"queryTimeout": "02:00:00",
 												"partitionOption": "None"
 											},
