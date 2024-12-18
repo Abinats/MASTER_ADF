@@ -193,7 +193,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select MiddleName from dbo.temp_customer where CustomerID=16",
+						"sqlReaderQuery": "select CustomerID,MiddleName from dbo.temp_customer ",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
