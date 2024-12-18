@@ -259,7 +259,7 @@
 										"typeProperties": {
 											"source": {
 												"type": "AzureSqlSource",
-												"sqlReaderQuery": "SELECT MiddleName FROM dbo.temp_customer",
+												"sqlReaderQuery": "SELECT MiddleName FROM dbo.customers WHERE MiddleName = @pipeline().parameters.MiddleName\n",
 												"queryTimeout": "02:00:00",
 												"partitionOption": "None"
 											},
