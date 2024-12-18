@@ -189,7 +189,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"variableName": "status",
-					"value": ""
+					"value": {
+						"value": "@activity('Stored procedure1').output",
+						"type": "Expression"
+					}
 				}
 			}
 		],
