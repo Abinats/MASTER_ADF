@@ -264,7 +264,10 @@
 											"scripts": [
 												{
 													"type": "Query",
-													"text": "select MiddleName from dbo.temp_customer\nprint'MiddleName'"
+													"text": {
+														"value": "@pipeline().parameters.MiddleName",
+														"type": "Expression"
+													}
 												}
 											],
 											"scriptBlockExecutionTimeout": "02:00:00",
