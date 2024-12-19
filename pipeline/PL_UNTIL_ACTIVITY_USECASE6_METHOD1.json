@@ -247,6 +247,8 @@
 		"folder": {
 			"name": "UNTIL_ACTIVITY_USECASE"
 		},
-		"annotations": []
+		"annotations": [
+			"until"
+		]
 	}
 }
